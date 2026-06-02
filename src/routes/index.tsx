@@ -94,11 +94,13 @@ function Hero() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
         <div className="animate-fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/40 bg-navy-deep/40 backdrop-blur-sm mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-            <span className="text-xs tracking-[0.2em] uppercase text-gold">
-              New Website Coming Soon
-            </span>
+          <div className="inline-flex items-stretch mb-8 shadow-elegant border border-gold/40 rounded-sm overflow-hidden">
+            <div className="bg-gradient-gold text-navy px-4 py-2.5 font-sans text-[11px] tracking-[0.25em] uppercase font-bold flex items-center">
+              Announcement
+            </div>
+            <div className="bg-navy-deep/70 backdrop-blur-sm px-5 py-2.5 text-[11px] tracking-[0.25em] uppercase text-primary-foreground/90 flex items-center border-l border-gold/40">
+              New Website Launching Soon
+            </div>
           </div>
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-primary-foreground leading-[1.05]">
             Welcome to <br />

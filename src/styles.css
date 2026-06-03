@@ -102,4 +102,15 @@
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* Below-fold sections: defer rendering until near viewport */
+  .section-lazy {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+}
+
+/* Safe-area for sticky mobile CTA — prevents content from being hidden behind it */
+@media (max-width: 767px) {
+  footer { padding-bottom: 5rem; }
 }

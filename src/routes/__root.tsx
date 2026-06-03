@@ -11,6 +11,16 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { getStructuredData } from "../lib/seo-schema";
+
+/* ── Constants ─────────────────────────────────────────────── */
+
+const SITE_URL = "https://mlcdallas.net";
+const SITE_TITLE = "MercyLife Church Dominion Temple — Arlington, TX";
+const SITE_DESCRIPTION =
+  "Join MercyLife Church Dominion Temple for powerful worship in Arlington, TX. Friday service at 7:30 PM & Sunday at 10 AM. A welcoming Christian church — plan your visit today!";
+
+/* ── Error / 404 ───────────────────────────────────────────── */
 
 function NotFoundComponent() {
   return (
@@ -72,27 +82,71 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+/* ── Route ─────────────────────────────────────────────────── */
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
+      /* ── Core ─────────────────────────────────────────── */
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: "MercyLife Church" },
+      {
+        name: "robots",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+      { name: "theme-color", content: "#0F2747" },
+      { name: "format-detection", content: "telephone=yes" },
+
+      /* ── Open Graph ───────────────────────────────────── */
+      { property: "og:site_name", content: "MercyLife Church Dominion Temple" },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:locale", content: "en_US" },
+
+      /* ── Twitter / X Card ─────────────────────────────── */
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+
+      /* ── Geo ──────────────────────────────────────────── */
+      { name: "geo.region", content: "US-TX" },
+      { name: "geo.placename", content: "Arlington" },
+      { name: "geo.position", content: "32.6937;-97.1199" },
+      { name: "ICBM", content: "32.6937, -97.1199" },
     ],
     links: [
+      /* ── Styles ───────────────────────────────────────── */
       { rel: "stylesheet", href: appCss },
+
+      /* ── Canonical ────────────────────────────────────── */
+      { rel: "canonical", href: SITE_URL + "/" },
+
+      /* ── Favicon ──────────────────────────────────────── */
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+
+      /* ── Fonts ────────────────────────────────────────── */
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap",
+      },
+
+      /* ── Performance hints ────────────────────────────── */
+      { rel: "dns-prefetch", href: "https://www.google.com" },
+      { rel: "dns-prefetch", href: "https://maps.googleapis.com" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: getStructuredData(),
       },
     ],
   }),
@@ -102,19 +156,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+/* ── Shell ─────────────────────────────────────────────────── */
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <head>
         <HeadContent />
       </head>
       <body>
+        {/* Skip-to-content link for keyboard / screen-reader users */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-gold focus:px-4 focus:py-2 focus:text-navy focus:font-semibold focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         {children}
         <Scripts />
       </body>
     </html>
   );
 }
+
+/* ── Root ──────────────────────────────────────────────────── */
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();

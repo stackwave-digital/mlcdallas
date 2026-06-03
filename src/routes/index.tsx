@@ -303,7 +303,7 @@ function WhatToExpect() {
             are on your faith journey, you're welcome here.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8">
           {items.map(({ Icon, title, desc }) => (
             <div
               key={title}

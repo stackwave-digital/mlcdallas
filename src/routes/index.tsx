@@ -15,8 +15,8 @@ import {
   BookOpen,
   ChevronDown,
 } from "lucide-react";
-import heroImg from "@/assets/hero-worship.jpg";
-import communityImg from "@/assets/community-welcome.jpg";
+import heroImg from "@/assets/pb-and-ministers.jpeg";
+import communityImg from "@/assets/community-welcome.jpeg";
 import logoImg from "@/assets/logo.png";
 
 /* ── Route meta (page-level overrides) ─────────────────────── */
@@ -24,27 +24,27 @@ import logoImg from "@/assets/logo.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "MercyLife Church Dominion Temple — Arlington, TX" },
+      { title: "MercyLife Church Dominion Temple — Dallas, TX" },
       {
         name: "description",
         content:
-          "MercyLife Church Dominion Temple is a welcoming Christian church in Arlington, Texas. Join us for Friday worship at 7:30 PM and Sunday service at 10:00 AM. Plan your visit today!",
+          "MercyLife Church Dominion Temple is a welcoming Christian church in Dallas, Texas. Join us for Friday worship at 7:30 PM and Sunday service at 10:00 AM. Plan your visit today!",
       },
-      { property: "og:title", content: "MercyLife Church Dominion Temple — Arlington, TX" },
+      { property: "og:title", content: "MercyLife Church Dominion Temple — Dallas, TX" },
       {
         property: "og:description",
         content:
-          "Experience powerful worship, practical teaching, and a vibrant community at MercyLife Church. Services every Friday at 7:30 PM & Sunday at 10 AM in Arlington, TX.",
+          "Experience powerful worship, practical teaching, and a vibrant community at MercyLife Church. Services every Friday at 7:30 PM & Sunday at 10 AM in Dallas, TX.",
       },
       { property: "og:image", content: heroImg },
       {
         property: "og:image:alt",
-        content: "Worship service at MercyLife Church Dominion Temple in Arlington, Texas",
+        content: "Worship service at MercyLife Church Dominion Temple in Dallas, Texas",
       },
       { name: "twitter:image", content: heroImg },
       {
         name: "twitter:image:alt",
-        content: "Worship service at MercyLife Church Dominion Temple in Arlington, Texas",
+        content: "Worship service at MercyLife Church Dominion Temple in Dallas, Texas",
       },
     ],
   }),
@@ -136,7 +136,7 @@ function Hero() {
     >
       <img
         src={heroImg}
-        alt="Congregation worshiping at MercyLife Church Dominion Temple in Arlington, Texas"
+        alt="Congregation worshiping at MercyLife Church Dominion Temple in Dallas, Texas"
         width={1920}
         height={1280}
         className="absolute inset-0 w-full h-full object-cover"
@@ -150,7 +150,7 @@ function Hero() {
         <div className="animate-fade-up">
           <div className="inline-flex items-stretch mb-8 shadow-elegant border border-gold/40 rounded-sm overflow-hidden">
             <div className="bg-gradient-gold text-navy px-4 py-2.5 font-sans text-[11px] tracking-[0.25em] uppercase font-bold flex items-center">
-              Arlington, TX
+              Dallas, TX
             </div>
             <div className="bg-navy-deep/70 backdrop-blur-sm px-5 py-2.5 text-[11px] tracking-[0.25em] uppercase text-primary-foreground/90 flex items-center border-l border-gold/40">
               Fridays 7:30 PM &bull; Sundays 10:00 AM
@@ -162,12 +162,12 @@ function Hero() {
               Dominion Temple
             </span>
             <span className="block text-2xl sm:text-3xl md:text-4xl mt-4 font-normal text-primary-foreground/80">
-              Your Church Home in Arlington, Texas
+              Your Church Home in Dallas, Texas
             </span>
           </h1>
           <p className="mt-8 text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
             Experience powerful worship, life-changing teaching, and a warm community of believers
-            at one of Arlington's most welcoming churches. Whether you're exploring faith or
+            at one of Dallas's most welcoming churches. Whether you're exploring faith or
             deepening your walk with God, you belong here.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
@@ -216,15 +216,15 @@ function Welcome() {
         <div>
           <span className="gold-rule mb-6" aria-hidden="true" />
           <h2 className="text-4xl md:text-5xl text-navy mb-6">
-            A Welcoming Christian Church in Arlington, Texas
+            A Welcoming Christian Church in Dallas, Texas
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-4">
             MercyLife Church Dominion Temple is a vibrant, faith-centered church located in the
-            heart of Arlington, TX. We are passionate about helping people encounter God's presence,
-            grow in faith, and build meaningful relationships that last a lifetime.
+            Dallas–Fort Worth metroplex. We are passionate about helping people encounter God's
+            presence, grow in faith, and build meaningful relationships that last a lifetime.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Whether you're searching for churches in Arlington TX for the first time or looking for
+            Whether you're searching for churches in Dallas TX for the first time or looking for
             a new church family, you'll find a warm community ready to walk alongside you on your
             journey of faith.
           </p>
@@ -248,7 +248,7 @@ function Welcome() {
           />
           <img
             src={communityImg}
-            alt="MercyLife Church Dominion Temple community members greeting visitors at a Sunday worship service in Arlington, Texas"
+            alt="MercyLife Church Dominion Temple community members greeting visitors at a Sunday worship service in Dallas, Texas"
             loading="lazy"
             decoding="async"
             width={1400}
@@ -299,7 +299,7 @@ function WhatToExpect() {
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
             Visiting a new church can feel unfamiliar, so we want you to know exactly what to expect
-            when you join us for worship in Arlington, TX. No matter your background or where you
+            when you join us for worship in Dallas, TX. No matter your background or where you
             are on your faith journey, you're welcome here.
           </p>
         </div>
@@ -330,13 +330,13 @@ function Services() {
       day: "Friday",
       name: "Friday Night Worship",
       time: "7:30 PM",
-      desc: "An intimate Friday night church service of worship, prayer, and the Word — the perfect way to end your week in Arlington.",
+      desc: "An intimate Friday night church service of worship, prayer, and the Word — the perfect way to end your week in Dallas.",
     },
     {
       day: "Sunday",
       name: "Sunday Morning Service",
       time: "10:00 AM",
-      desc: "Powerful Sunday worship in Arlington, TX with practical teaching, vibrant praise, and a welcoming community for the whole family.",
+      desc: "Powerful Sunday worship in Dallas, TX with practical teaching, vibrant praise, and a welcoming community for the whole family.",
     },
   ];
   return (
@@ -360,7 +360,7 @@ function Services() {
             Worship Services — Friday Night &amp; Sunday Morning
           </h2>
           <p className="text-primary-foreground/70 max-w-xl mx-auto text-lg">
-            Join us for a worship service in Arlington, TX. Experience God's presence through
+            Join us for a worship service in Dallas, TX. Experience God's presence through
             anointed praise, prayer, and teaching that transforms lives.
           </p>
         </div>
@@ -420,7 +420,7 @@ function Location() {
         <div className="text-center mb-16">
           <span className="gold-rule mb-6" aria-hidden="true" />
           <h2 className="text-4xl md:text-5xl text-navy">
-            Visit MercyLife Church Dominion Temple in Arlington, TX
+            Visit MercyLife Church Dominion Temple in Dallas, TX
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto mt-4 text-lg">
             Conveniently located on Pleasant Valley Lane, our church is easy to find and has ample
@@ -489,7 +489,7 @@ function Contact() {
           Connect With MercyLife Church Dominion Temple
         </h2>
         <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-          Planning your first visit to our Christian church in Arlington, Texas? We'd love to hear
+          Planning your first visit to our Christian church in Dallas, Texas? We'd love to hear
           from you. Whether you have questions about our worship services, need prayer, or simply
           want to learn more, our team is here to help. Call us anytime.
         </p>
@@ -548,7 +548,7 @@ function Connect() {
       cta: "Watch Messages & Subscribe",
       url: YOUTUBE_URL,
       Icon: Youtube,
-      copy: "Full messages, worship moments, and teachings on demand from our Arlington, TX services.",
+      copy: "Full messages, worship moments, and teachings on demand from our Dallas, TX services.",
     },
   ];
   return (
@@ -635,7 +635,7 @@ function ComingSoon() {
           grow in your faith journey.
         </p>
         <p className="text-lg text-primary-foreground/75 mt-4">
-          Until then, we'd love to connect with you in person at our Arlington, TX location or
+          Until then, we'd love to connect with you in person at our Dallas, TX location or
           through our social channels.
         </p>
       </div>

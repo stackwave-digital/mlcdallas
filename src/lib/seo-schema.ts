@@ -16,7 +16,7 @@ const churchSchema = {
   name: "MercyLife Church Dominion Temple",
   alternateName: "MercyLife Church",
   description:
-    "MercyLife Church Dominion Temple is a welcoming Christian church in Arlington, Texas offering powerful Friday night and Sunday morning worship services. Experience God's presence and join a vibrant faith community.",
+    "MercyLife Church Dominion Temple is a welcoming Christian church in Dallas, Texas offering powerful Friday night and Sunday morning worship services. Experience God's presence and join a vibrant faith community in the DFW metroplex.",
   url: SITE_URL,
   telephone: "+1-817-677-1407",
   email: undefined,
@@ -58,6 +58,15 @@ const churchSchema = {
     "https://www.google.com/maps?q=MercyLife+Church+Dominion+Temple+3100+Pleasant+Valley+Ln,+Arlington,+TX+76015",
   isAccessibleForFree: true,
   publicAccess: true,
+  areaServed: {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: 32.7767,
+      longitude: -96.7970,
+    },
+    geoRadius: "50000",
+  },
 };
 
 const organizationSchema = {
@@ -87,7 +96,15 @@ const organizationSchema = {
     "@type": "ContactPoint",
     telephone: "+1-817-677-1407",
     contactType: "customer service",
-    areaServed: "US",
+    areaServed: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: 32.7767,
+        longitude: -96.7970,
+      },
+      geoRadius: "50000",
+    },
     availableLanguage: "English",
   },
   sameAs: [

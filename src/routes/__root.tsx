@@ -16,9 +16,9 @@ import { getStructuredData } from "../lib/seo-schema";
 /* ── Constants ─────────────────────────────────────────────── */
 
 const SITE_URL = "https://mlcdallas.net";
-const SITE_TITLE = "MercyLife Church Dominion Temple — Arlington, TX";
+const SITE_TITLE = "MercyLife Church Dominion Temple — Dallas, TX";
 const SITE_DESCRIPTION =
-  "Join MercyLife Church Dominion Temple for powerful worship in Arlington, TX. Friday service at 7:30 PM & Sunday at 10 AM. A welcoming Christian church — plan your visit today!";
+  "Join MercyLife Church Dominion Temple for powerful worship in Dallas, TX. Friday service at 7:30 PM & Sunday at 10 AM. A welcoming Christian church — plan your visit today!";
 
 /* ── Error / 404 ───────────────────────────────────────────── */
 
@@ -115,7 +115,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
       /* ── Geo ──────────────────────────────────────────── */
       { name: "geo.region", content: "US-TX" },
-      { name: "geo.placename", content: "Arlington" },
+      { name: "geo.placename", content: "Dallas" },
       { name: "geo.position", content: "32.6937;-97.1199" },
       { name: "ICBM", content: "32.6937, -97.1199" },
     ],

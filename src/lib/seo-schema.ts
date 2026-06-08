@@ -7,7 +7,7 @@
  * @see https://developers.google.com/search/docs/appearance/structured-data
  */
 
-const SITE_URL = "https://mlcdallas.net";
+const SITE_URL = "https://mlcdallas.org";
 
 const churchSchema = {
   "@context": "https://schema.org",
@@ -51,6 +51,7 @@ const churchSchema = {
     },
   ],
   sameAs: [
+    "https://mlcdallas.net",
     "https://www.instagram.com/mercylife_dallas",
     "https://www.youtube.com/@brianamoatengtv",
   ],
@@ -110,7 +111,7 @@ const organizationSchema = {
   sameAs: [
     "https://www.instagram.com/mercylife_dallas",
     "https://www.youtube.com/@brianamoatengtv",
-    "https://mlcdallas.org",
+    "https://mlcdallas.net",
   ],
 };
 

@@ -15,7 +15,7 @@ import { getStructuredData } from "../lib/seo-schema";
 
 /* ── Constants ─────────────────────────────────────────────── */
 
-const SITE_URL = "https://mlcdallas.net";
+const SITE_URL = "https://mlcdallas.org";
 const SITE_TITLE = "MercyLife Church Dominion Temple — Dallas, TX";
 const SITE_DESCRIPTION =
   "Join MercyLife Church Dominion Temple for powerful worship in Dallas, TX. Friday service at 7:30 PM & Sunday at 10 AM. A welcoming Christian church — plan your visit today!";

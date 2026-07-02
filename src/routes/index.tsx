@@ -18,6 +18,8 @@ import {
 import heroImg from "@/assets/pb-and-ministers.jpeg";
 import communityImg from "@/assets/community-welcome.jpeg";
 import logoImg from "@/assets/logo.png";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 /* ── Route meta (page-level overrides) ─────────────────────── */
 
@@ -67,7 +69,7 @@ const YOUTUBE_URL = "https://www.youtube.com/@brianamoatengtv";
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Nav />
+      <Header />
       <main id="main-content">
         <Hero />
         <Welcome />
@@ -85,45 +87,7 @@ function Index() {
 }
 
 /* ── Nav ───────────────────────────────────────────────────── */
-
-function Nav() {
-  return (
-    <header className="absolute top-0 left-0 right-0 z-30" role="banner">
-      <nav
-        className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between"
-        aria-label="Main navigation"
-      >
-        <a
-          href="#top"
-          id="nav-home"
-          className="flex items-center gap-2 group"
-          aria-label="MercyLife Church — Back to top"
-        >
-          <div className="w-9 h-9 rounded-full bg-gradient-gold flex items-center justify-center shadow-gold">
-            <img
-              src={logoImg}
-              width={36}
-              height={36}
-              alt="MercyLife Church logo"
-              decoding="async"
-            />
-          </div>
-          <span className="font-serif text-xl text-primary-foreground tracking-wide">
-            MercyLife Church
-          </span>
-        </a>
-        <a
-          href="#visit"
-          id="nav-plan-visit"
-          className="hidden sm:inline-flex items-center gap-2 text-sm text-primary-foreground/90 hover:text-gold transition-colors"
-          aria-label="Plan your visit to MercyLife Church"
-        >
-          Plan Your Visit <ArrowRight className="w-4 h-4" aria-hidden="true" />
-        </a>
-      </nav>
-    </header>
-  );
-}
+// Removed: Nav header is now imported from Header.tsx
 
 /* ── Hero ──────────────────────────────────────────────────── */
 
@@ -644,105 +608,7 @@ function ComingSoon() {
 }
 
 /* ── Footer ───────────────────────────────────────────────── */
-
-function Footer() {
-  return (
-    <footer
-      className="bg-navy text-primary-foreground border-t border-primary-foreground/10"
-      role="contentinfo"
-    >
-      <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
-        {/* Brand */}
-        <div className="md:col-span-2">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-9 h-9 rounded-full bg-gradient-gold flex items-center justify-center">
-              <img
-                src={logoImg}
-                width={36}
-                height={36}
-                alt="MercyLife Church logo"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <span className="font-serif text-xl">MercyLife Church</span>
-          </div>
-          <address className="not-italic text-primary-foreground/70 leading-relaxed mb-3">
-            3100 Pleasant Valley Ln
-            <br />
-            Arlington, TX 76015
-          </address>
-          <a
-            href={PHONE_HREF}
-            className="text-primary-foreground/70 hover:text-gold transition-colors block"
-          >
-            {PHONE_DISPLAY}
-          </a>
-        </div>
-
-        {/* Service Times */}
-        <div>
-          <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4">Service Times</div>
-          <ul className="space-y-2 text-primary-foreground/80">
-            <li>Friday — 7:30 PM</li>
-            <li>Sunday — 10:00 AM</li>
-          </ul>
-        </div>
-
-        {/* Links & Social */}
-        <div>
-          <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4">Follow</div>
-          <ul className="space-y-3">
-            <li>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-gold transition-colors"
-                aria-label="Follow MercyLife Church on Instagram"
-              >
-                <Instagram className="w-4 h-4" aria-hidden="true" /> Instagram
-              </a>
-            </li>
-            <li>
-              <a
-                href={YOUTUBE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-gold transition-colors"
-                aria-label="Watch MercyLife Church on YouTube"
-              >
-                <Youtube className="w-4 h-4" aria-hidden="true" /> YouTube
-              </a>
-            </li>
-          </ul>
-
-          {/* Future pages (commented nav for future internal linking) */}
-          <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4 mt-8">Coming Soon</div>
-          <ul className="space-y-2 text-primary-foreground/50 text-sm">
-            <li>About</li>
-            <li>Ministries</li>
-            <li>Events</li>
-            <li>Sermons</li>
-            <li>Giving</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-primary-foreground/10">
-        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-serif italic text-gold text-lg">
-            Encounter God. Experience Mercy. Live Purposefully.
-          </p>
-          <p className="text-xs text-primary-foreground/50">
-            © {new Date().getFullYear()} MercyLife Church Dominion Temple. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
+// Removed: Footer is now imported from Footer.tsx
 
 /* ── Sticky Mobile CTA ────────────────────────────────────── */
 

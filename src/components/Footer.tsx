@@ -48,14 +48,30 @@ export default function Footer() {
         {/* Navigation & Service Times */}
         <div className="grid grid-cols-2 gap-4 md:col-span-2">
           <div>
-            <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4">Quick Links</div>
-            <ul className="space-y-2.5">
+            <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4 font-semibold">Quick Links</div>
+            <ul className="space-y-2.5 font-sans">
               <li>
                 <Link
                   to="/"
                   className="text-primary-foreground/80 hover:text-gold transition-colors text-sm"
                 >
                   Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/sermons"
+                  className="text-primary-foreground/80 hover:text-gold transition-colors text-sm"
+                >
+                  Sermons
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/events"
+                  className="text-primary-foreground/80 hover:text-gold transition-colors text-sm"
+                >
+                  Events
                 </Link>
               </li>
               <li>

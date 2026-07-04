@@ -14,8 +14,8 @@ import { Input } from "@/components/ui/input";
 
 import sermonCoverFaith from "@/assets/sermon_series_faith.png";
 import worshipExperience from "@/assets/worship_experience.jpg";
-import youthFellowship from "@/assets/youth_fellowship.png";
-import churchArchitecture from "@/assets/church_architecture.png";
+import youthFellowship from "@/assets/youth.jpg";
+import churchArchitecture from "@/assets/sunctuary.jpg";
 
 export const Route = createFileRoute("/sermons")({
   head: () => ({
@@ -197,20 +197,30 @@ function Sermons() {
 
       <main id="main-content" className="flex-grow pt-24 md:pt-28">
         {/* Hero Section */}
-        <section className="bg-navy text-primary-foreground py-20 relative overflow-hidden">
+        <section className="bg-navy text-primary-foreground py-24 md:py-32 relative overflow-hidden border-b border-white/10">
           <div
-            className="absolute inset-0 opacity-[0.05]"
+            className="absolute inset-0 opacity-[0.05] pointer-events-none"
             style={{
               backgroundImage:
                 "radial-gradient(circle at 80% 30%, var(--gold) 0%, transparent 40%)",
             }}
+            aria-hidden="true"
           />
-          <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="gold-rule mx-auto" />
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif">
+          <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto" aria-hidden="true">
+            <div className="w-[1px] bg-white h-full"></div>
+            <div className="w-[1px] bg-white h-full"></div>
+            <div className="w-[1px] bg-white h-full"></div>
+          </div>
+          <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-6 animate-fade-up">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <span className="w-8 h-[1px] bg-gold" />
+              <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Teachings</span>
+              <span className="w-8 h-[1px] bg-gold" />
+            </div>
+            <h1 className="text-5xl sm:text-7xl font-serif mb-6 leading-tight">
               Sermon <span className="text-gold italic">Archives</span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-primary-foreground/75 max-w-2xl mx-auto leading-relaxed font-sans font-light">
               Watch recent messages, study sermon notes, and dive deep into scripture. Access
               transformative teachings from Friday Worship and Sunday Services.
             </p>
@@ -218,17 +228,17 @@ function Sermons() {
         </section>
 
         {/* Featured Sermon Section */}
-        <section className="py-16 max-w-7xl mx-auto px-6">
-          <div className="text-left mb-8 flex items-center gap-3">
-            <span className="bg-gold/20 text-navy font-semibold px-3 py-1 rounded-sm text-xs uppercase tracking-widest border border-gold/30">
+        <section className="py-20 max-w-7xl mx-auto px-6">
+          <div className="text-left mb-12 flex items-center gap-4">
+            <span className="bg-gold/15 text-navy font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider border border-gold/30">
               Latest Message
             </span>
-            <span className="h-px bg-border flex-grow" />
+            <span className="h-[1px] bg-border/60 flex-grow" />
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             {/* Lazy Loaded Video Player */}
-            <div className="lg:col-span-7 rounded-2xl overflow-hidden shadow-elegant border border-border bg-black relative min-h-[300px] sm:min-h-[400px] flex items-center justify-center group">
+            <div className="lg:col-span-7 rounded-2xl overflow-hidden shadow-material-2 border border-border bg-black relative min-h-[300px] sm:min-h-[400px] flex items-center justify-center group">
               {!featuredPlayTriggered ? (
                 <>
                   <img
@@ -260,22 +270,22 @@ function Sermons() {
             </div>
 
             {/* Featured Details and Notes Accordion */}
-            <div className="lg:col-span-5 flex flex-col justify-between p-8 rounded-2xl bg-card border border-border shadow-md">
+            <div className="lg:col-span-5 flex flex-col justify-between p-8 md:p-10 rounded-2xl glass-card border border-white/50 shadow-material-2">
               <div className="space-y-6">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground font-semibold uppercase tracking-wider font-sans">
+                    <span className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-gold" /> {featuredSermon.date}
                     </span>
                     <span>&bull;</span>
-                    <span className="flex items-center gap-1 font-semibold text-navy">
+                    <span className="flex items-center gap-1.5 text-navy font-serif">
                       <BookOpen className="w-3.5 h-3.5 text-gold" /> {featuredSermon.scripture}
                     </span>
                   </div>
-                  <h3 className="text-3xl font-serif text-navy leading-snug">
+                  <h3 className="text-3xl md:text-4xl font-serif text-navy leading-snug">
                     {featuredSermon.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground font-sans font-medium">
                     <User className="w-4 h-4 text-gold" />
                     <span>Preacher: </span>
                     <span className="font-semibold text-foreground">
@@ -290,7 +300,7 @@ function Sermons() {
                     <AccordionTrigger className="font-serif text-lg text-navy hover:text-gold cursor-pointer">
                       Sermon Outline
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm space-y-2 leading-relaxed">
+                    <AccordionContent className="text-muted-foreground text-sm space-y-2 leading-relaxed font-light">
                       <ul className="list-disc pl-5 space-y-1.5">
                         {featuredSermon.notes.outline.map((point, idx) => (
                           <li key={idx}>{point}</li>
@@ -302,7 +312,7 @@ function Sermons() {
                     <AccordionTrigger className="font-serif text-lg text-navy hover:text-gold cursor-pointer">
                       Key Scriptures
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm space-y-3 leading-relaxed">
+                    <AccordionContent className="text-muted-foreground text-sm space-y-3 leading-relaxed font-light">
                       {featuredSermon.notes.scriptures.map((scripture, idx) => (
                         <p key={idx} className="italic border-l-2 border-gold pl-3">
                           {scripture}
@@ -314,7 +324,7 @@ function Sermons() {
                     <AccordionTrigger className="font-serif text-lg text-navy hover:text-gold cursor-pointer">
                       Discussion &amp; Reflection
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm space-y-2 leading-relaxed">
+                    <AccordionContent className="text-muted-foreground text-sm space-y-2 leading-relaxed font-light">
                       <ol className="list-decimal pl-5 space-y-1.5">
                         {featuredSermon.notes.reflection.map((question, idx) => (
                           <li key={idx}>{question}</li>
@@ -325,12 +335,12 @@ function Sermons() {
                 </Accordion>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
+              <div className="mt-10 pt-6 border-t border-border/60 flex items-center justify-between">
                 <a
                   href={`https://www.youtube.com/watch?v=${featuredSermon.youtubeId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-navy hover:text-gold font-medium text-sm transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-navy hover:text-gold font-semibold text-xs tracking-wider uppercase font-sans transition-colors cursor-pointer"
                 >
                   Watch on YouTube <ArrowRight className="w-4 h-4" />
                 </a>
@@ -341,7 +351,7 @@ function Sermons() {
                       url: window.location.href,
                     }).catch(() => {});
                   }}
-                  className="p-2 text-muted-foreground hover:text-gold transition-colors cursor-pointer"
+                  className="p-2 text-muted-foreground hover:text-navy hover:bg-navy/5 rounded-full transition-all cursor-pointer"
                   aria-label="Share this sermon"
                 >
                   <Share2 className="w-4.5 h-4.5" />
@@ -352,7 +362,7 @@ function Sermons() {
         </section>
 
         {/* Filter & Search Bar Section */}
-        <section className="bg-secondary/40 py-10 border-y border-border">
+        <section className="bg-secondary/20 py-10 border-y border-border/40">
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-6 items-center justify-between">
             {/* Series Filter Tabs */}
             <div className="flex flex-wrap gap-2 w-full md:w-auto">
@@ -360,10 +370,10 @@ function Sermons() {
                 <button
                   key={series}
                   onClick={() => setActiveSeries(series)}
-                  className={`px-4.5 py-2 rounded-full text-xs font-semibold tracking-wide uppercase transition-all duration-300 cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
                     activeSeries === series
-                      ? "bg-navy text-primary-foreground shadow-elegant"
-                      : "bg-background border border-border text-navy hover:bg-navy/5"
+                      ? "bg-navy text-primary-foreground shadow-material-1"
+                      : "bg-white/70 border border-border text-muted-foreground hover:border-gold/30 hover:text-navy"
                   }`}
                 >
                   {series}
@@ -379,7 +389,7 @@ function Sermons() {
                 placeholder="Search by title, preacher, scripture..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-background border-border focus-visible:ring-gold"
+                className="pl-10 pr-4 py-3 bg-white/70 border-border/60 focus-visible:ring-gold font-sans text-sm rounded-full"
               />
             </div>
           </div>
@@ -388,7 +398,7 @@ function Sermons() {
         {/* Sermons Archive Grid */}
         <section className="py-20 max-w-7xl mx-auto px-6">
           {filteredSermons.length === 0 ? (
-            <div className="text-center py-20 bg-secondary/20 rounded-2xl border border-dashed border-border">
+            <div className="text-center py-20 bg-secondary/20 rounded-2xl border border-dashed border-border p-12">
               <p className="text-muted-foreground text-lg">No sermons match your criteria.</p>
             </div>
           ) : (
@@ -397,16 +407,16 @@ function Sermons() {
                 <article
                   key={sermon.id}
                   onClick={() => setActiveSermon(sermon)}
-                  className="group cursor-pointer rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-elegant transition-all duration-500 hover:-translate-y-1 flex flex-col justify-between"
+                  className="group cursor-pointer rounded-2xl overflow-hidden border border-border/60 bg-white p-2 shadow-material-1 hover:shadow-material-2 hover:-translate-y-1 transition-all duration-500 flex flex-col justify-between"
                 >
                   <div>
                     {/* Cover Photo */}
-                    <div className="relative overflow-hidden">
+                    <div className="relative overflow-hidden rounded-xl">
                       <AspectRatio ratio={16 / 10}>
                         <img
                           src={sermon.cover}
                           alt={sermon.title}
-                          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-103"
+                          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-[1.03]"
                           loading="lazy"
                         />
                       </AspectRatio>
@@ -425,25 +435,25 @@ function Sermons() {
 
                     {/* Content Description */}
                     <div className="p-6 space-y-3.5 text-left">
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-3 text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                         <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5" /> {sermon.date}
+                          <Calendar className="w-3.5 h-3.5 text-gold" /> {sermon.date}
                         </span>
                         <span>&bull;</span>
                         <span className="flex items-center gap-1 font-semibold text-navy font-serif">
-                          <BookOpen className="w-3.5 h-3.5" /> {sermon.scripture}
+                          <BookOpen className="w-3.5 h-3.5 text-gold" /> {sermon.scripture}
                         </span>
                       </div>
-                      <h4 className="font-serif text-2xl text-navy group-hover:text-gold transition-colors line-clamp-2">
+                      <h4 className="font-serif text-2xl text-navy group-hover:text-gold transition-colors line-clamp-2 leading-tight">
                         {sermon.title}
                       </h4>
-                      <p className="text-muted-foreground text-sm line-clamp-2">
+                      <p className="text-muted-foreground text-sm font-light leading-relaxed line-clamp-2">
                         {sermon.notes.outline[0]}
                       </p>
                     </div>
                   </div>
 
-                  <div className="px-6 pb-6 pt-4 border-t border-border flex items-center justify-between text-xs font-semibold text-navy">
+                  <div className="px-6 pb-4 pt-4 border-t border-border/40 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-navy">
                     <span className="flex items-center gap-1.5">
                       <User className="w-4 h-4 text-gold" /> {sermon.preacher}
                     </span>
@@ -463,7 +473,7 @@ function Sermons() {
       {/* Lightbox / Sermon Player Modal Dialog */}
       {activeSermon && (
         <Dialog open={activeSermon !== null} onOpenChange={(open) => !open && setActiveSermon(null)}>
-          <DialogContent className="max-w-4xl bg-navy/95 border-gold/30 p-2 sm:p-6 overflow-y-auto max-h-[92vh] flex flex-col justify-start items-center shadow-2xl rounded-2xl w-[95vw]">
+          <DialogContent className="max-w-4xl bg-navy/90 backdrop-blur-md border border-white/10 p-2 sm:p-6 overflow-y-auto max-h-[92vh] flex flex-col justify-start items-center shadow-2xl rounded-2xl w-[95vw]">
             <div className="w-full flex flex-col justify-start gap-4">
               <DialogTitle className="sr-only">{activeSermon.title}</DialogTitle>
               <DialogDescription className="sr-only">

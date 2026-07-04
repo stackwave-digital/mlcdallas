@@ -15,12 +15,12 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 
 import worshipExperience from "@/assets/worship_experience.jpg";
-import youthFellowship from "@/assets/youth_fellowship.png";
-import churchArchitecture from "@/assets/church_architecture.png";
+import youthFellowship from "@/assets/youth.jpg";
+import churchArchitecture from "@/assets/sunctuary.jpg";
 import pbAndMinisters from "@/assets/pb-and-ministers.jpeg";
 import communityWelcome from "@/assets/community-welcome.jpeg";
 import communityWelcome1 from "@/assets/community-welcome-1.jpg";
-import heroWorship from "@/assets/hero-worship.jpg";
+import heroWorship from "@/assets/adoration.jpg";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -162,20 +162,30 @@ function Gallery() {
 
       <main id="main-content" className="flex-grow pt-24 md:pt-28">
         {/* Hero Section */}
-        <section className="bg-navy text-primary-foreground py-20 relative overflow-hidden">
+        <section className="bg-navy text-primary-foreground py-24 md:py-32 relative overflow-hidden border-b border-white/10">
           <div
-            className="absolute inset-0 opacity-[0.05]"
+            className="absolute inset-0 opacity-[0.05] pointer-events-none"
             style={{
               backgroundImage:
                 "radial-gradient(circle at 20% 30%, var(--gold) 0%, transparent 40%)",
             }}
+            aria-hidden="true"
           />
-          <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-6">
-            <span className="gold-rule mx-auto" />
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif">
+          <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto" aria-hidden="true">
+            <div className="w-[1px] bg-white h-full"></div>
+            <div className="w-[1px] bg-white h-full"></div>
+            <div className="w-[1px] bg-white h-full"></div>
+          </div>
+          <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-6 animate-fade-up">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <span className="w-8 h-[1px] bg-gold" />
+              <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Moments</span>
+              <span className="w-8 h-[1px] bg-gold" />
+            </div>
+            <h1 className="text-5xl sm:text-7xl font-serif mb-6 leading-tight">
               Church <span className="text-gold italic">Gallery</span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed font-sans">
+            <p className="text-lg md:text-xl text-primary-foreground/75 max-w-2xl mx-auto leading-relaxed font-sans font-light">
               Take a visual tour of MercyLife Church Dominion Temple. Experience the warmth of our
               community, the power of our worship services, and the beauty of our fellowship.
             </p>
@@ -183,11 +193,11 @@ function Gallery() {
         </section>
 
         {/* Featured Highlights Carousel */}
-        <section className="py-16 bg-secondary/30">
+        <section className="py-20 bg-secondary/20 border-b border-border/40">
           <div className="max-w-6xl mx-auto px-6">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl text-navy">Featured Moments</h2>
-              <p className="text-muted-foreground mt-2">Highlighted snapshots of our church life</p>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl text-navy font-serif">Featured Moments</h2>
+              <p className="text-xs text-muted-foreground mt-2 uppercase tracking-wider">Highlighted snapshots of our church life</p>
             </div>
 
             <div className="relative px-1 sm:px-10">
@@ -195,19 +205,19 @@ function Gallery() {
                 <CarouselContent>
                   {GALLERY_IMAGES.slice(0, 3).map((img, idx) => (
                     <CarouselItem key={img.id}>
-                      <div className="overflow-hidden rounded-2xl border border-border shadow-elegant bg-card flex flex-col md:flex-row items-stretch">
+                      <div className="overflow-hidden rounded-2xl border border-border shadow-material-2 bg-white flex flex-col md:flex-row items-stretch">
                         <div className="md:w-3/5 relative">
                           <AspectRatio ratio={16 / 10}>
                             <img
                               src={img.src}
                               alt={img.title}
-                              className="object-cover w-full h-full hover:scale-102 transition-transform duration-700"
+                              className="object-cover w-full h-full hover:scale-[1.02] transition-transform duration-700"
                             />
                           </AspectRatio>
                         </div>
-                        <div className="md:w-2/5 p-8 flex flex-col justify-between bg-navy text-primary-foreground">
+                        <div className="md:w-2/5 p-8 md:p-10 flex flex-col justify-between glass-panel-dark text-primary-foreground relative">
                           <div className="space-y-4">
-                            <div className="flex items-center gap-3 text-xs text-gold/80">
+                            <div className="flex items-center gap-3 text-[10px] uppercase font-bold tracking-wider text-gold/90">
                               <span className="flex items-center gap-1 font-serif">
                                 <Tag className="w-3.5 h-3.5" /> {img.category}
                               </span>
@@ -216,14 +226,14 @@ function Gallery() {
                                 <Calendar className="w-3.5 h-3.5" /> {img.date}
                               </span>
                             </div>
-                            <h3 className="text-3xl font-serif">{img.title}</h3>
-                            <p className="text-primary-foreground/70 text-sm leading-relaxed">
+                            <h3 className="text-3xl font-serif leading-tight">{img.title}</h3>
+                            <p className="text-primary-foreground/75 text-sm font-light leading-relaxed">
                               {img.desc}
                             </p>
                           </div>
                           <button
                             onClick={() => openLightbox(idx)}
-                            className="mt-6 inline-flex items-center gap-2 text-gold hover:text-primary-foreground font-medium text-sm transition-colors border border-gold/40 hover:border-gold px-4 py-2 rounded-full w-fit cursor-pointer"
+                            className="mt-8 inline-flex items-center justify-center gap-2 text-navy bg-gradient-gold hover:scale-[1.02] active:scale-[0.98] font-semibold text-xs tracking-wider uppercase px-6 py-3 rounded-full w-fit transition-all cursor-pointer shadow-gold"
                           >
                             <ZoomIn className="w-4 h-4" /> View Fullscreen
                           </button>
@@ -232,25 +242,25 @@ function Gallery() {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="hidden sm:inline-flex -left-4 md:-left-12 border-navy text-navy hover:bg-navy hover:text-primary-foreground cursor-pointer" />
-                <CarouselNext className="hidden sm:inline-flex -right-4 md:-right-12 border-navy text-navy hover:bg-navy hover:text-primary-foreground cursor-pointer" />
+                <CarouselPrevious className="hidden sm:inline-flex -left-4 md:-left-12 border border-navy/20 bg-white/80 backdrop-blur-sm text-navy hover:bg-navy hover:text-white cursor-pointer" />
+                <CarouselNext className="hidden sm:inline-flex -right-4 md:-right-12 border border-navy/20 bg-white/80 backdrop-blur-sm text-navy hover:bg-navy hover:text-white cursor-pointer" />
               </Carousel>
             </div>
           </div>
         </section>
 
         {/* Gallery Grid & Filter Section */}
-        <section className="py-20 max-w-7xl mx-auto px-6">
+        <section className="py-24 max-w-7xl mx-auto px-6">
           {/* Category Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-12 border-b border-border pb-6">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-12 border-b border-border/60 pb-6">
             {CATEGORIES.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-5 py-2.5 rounded-full text-sm font-medium tracking-wide uppercase transition-all duration-300 cursor-pointer ${
+                className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
                   activeCategory === category
-                    ? "bg-navy text-primary-foreground shadow-elegant"
-                    : "bg-secondary text-navy hover:bg-navy/10"
+                    ? "bg-navy text-primary-foreground shadow-material-1"
+                    : "bg-white/70 border border-border text-muted-foreground hover:border-gold/30 hover:text-navy"
                 }`}
               >
                 {category}
@@ -260,35 +270,37 @@ function Gallery() {
 
           {/* Grid Layout */}
           {filteredImages.length === 0 ? (
-            <div className="text-center py-20 bg-secondary/20 rounded-2xl border border-dashed border-border">
+            <div className="text-center py-20 bg-secondary/20 rounded-2xl border border-dashed border-border p-12">
               <p className="text-muted-foreground text-lg">No images found in this category.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">
               {filteredImages.map((img, index) => (
                 <div
                   key={img.id}
                   onClick={() => openLightbox(index)}
-                  className="group relative cursor-pointer overflow-hidden rounded-2xl border border-border shadow-md hover:shadow-elegant transition-all duration-500 hover:-translate-y-1 bg-card"
+                  className="group relative cursor-pointer overflow-hidden rounded-2xl border border-border/60 shadow-material-1 hover:shadow-material-2 hover:-translate-y-1 bg-white p-2 transition-all duration-500"
                 >
-                  <AspectRatio ratio={4 / 3}>
-                    <img
-                      src={img.src}
-                      alt={img.title}
-                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </AspectRatio>
-                  {/* Subtle Gradient Backplate Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy-deep/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 space-y-2">
-                      <span className="inline-block bg-gold text-navy font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full">
-                        {img.category}
-                      </span>
-                      <h4 className="font-serif text-xl text-primary-foreground">{img.title}</h4>
-                      <p className="text-primary-foreground/80 text-xs line-clamp-2">{img.desc}</p>
-                      <div className="flex items-center gap-1.5 text-gold text-xs font-semibold pt-1">
-                        <ZoomIn className="w-3.5 h-3.5" /> Enlarge Photo
+                  <div className="rounded-xl overflow-hidden relative">
+                    <AspectRatio ratio={4 / 3}>
+                      <img
+                        src={img.src}
+                        alt={img.title}
+                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </AspectRatio>
+                    {/* Subtle Gradient Backplate Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/95 via-navy-deep/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 space-y-2">
+                        <span className="inline-block bg-gold text-navy font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full">
+                          {img.category}
+                        </span>
+                        <h4 className="font-serif text-xl text-primary-foreground leading-tight">{img.title}</h4>
+                        <p className="text-primary-foreground/75 text-xs line-clamp-2 leading-relaxed font-light">{img.desc}</p>
+                        <div className="flex items-center gap-1.5 text-gold text-xs font-semibold pt-1 uppercase tracking-wider">
+                          <ZoomIn className="w-3.5 h-3.5" /> Enlarge Photo
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -304,7 +316,7 @@ function Gallery() {
       {/* Lightbox Modal Dialog */}
       {lightboxIndex !== null && (
         <Dialog open={lightboxIndex !== null} onOpenChange={(open) => !open && closeLightbox()}>
-          <DialogContent className="max-w-5xl bg-navy/95 border-gold/30 p-2 sm:p-6 overflow-hidden flex flex-col justify-center items-center shadow-2xl rounded-2xl w-[95vw] sm:w-full">
+          <DialogContent className="max-w-5xl bg-navy/90 backdrop-blur-md border border-white/10 p-2 sm:p-6 overflow-hidden flex flex-col justify-center items-center shadow-2xl rounded-2xl w-[95vw] sm:w-full">
             <div className="relative w-full flex flex-col justify-center items-center max-h-[85vh]">
               {/* Media Display Container */}
               <div className="relative w-full flex items-center justify-center bg-black/40 rounded-xl overflow-hidden min-h-[300px] md:min-h-[500px]">

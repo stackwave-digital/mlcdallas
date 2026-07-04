@@ -24,6 +24,8 @@ export default function Header() {
 
   const navLinks = [
     { name: "Home", to: "/" },
+    { name: "Sermons", to: "/sermons" },
+    { name: "Events", to: "/events" },
     { name: "Gallery", to: "/gallery" },
   ];
 
@@ -31,7 +33,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-navy/90 backdrop-blur-md border-b border-gold/20 py-4 shadow-elegant"
+          ? "glass-panel-dark border-b border-gold/20 py-3 shadow-elegant"
           : "bg-transparent py-6"
       }`}
       role="banner"

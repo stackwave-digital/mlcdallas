@@ -6,6 +6,12 @@
     <meta name="robots" content="noindex" />
     <title>MercyLife Church — Content Manager</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      // Local development helper: automatically connect localhost to the live Netlify Identity instance
+      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        localStorage.setItem("netlifySiteURL", "https://mlcdallas.org");
+      }
+    </script>
   </head>
   <body>
     <!-- Include the Decap CMS script -->

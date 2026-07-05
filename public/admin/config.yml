@@ -1,6 +1,7 @@
 backend:
   name: git-gateway
   branch: main
+  repo: stackwave-digital/mlcdallas
 
 # Enable local development backend — lets you edit files locally on disk
 local_backend: true

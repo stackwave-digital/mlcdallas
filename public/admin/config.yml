@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+# Enable local development backend — lets you edit files locally on disk
+local_backend: true
+
 # Where uploaded media goes
 media_folder: "public/uploads"
 public_folder: "/uploads"

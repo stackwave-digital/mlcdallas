@@ -17,21 +17,32 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import heroImg from "@/assets/pb-and-ministers.jpeg";
-import communityImg from "@/assets/community-welcome.jpeg";
-import pastorBrianImg from "@/assets/pastor-brian.jpeg";
-import visionImg from "@/assets/hero-worship.jpg";
-import sanctuary from "@/assets/sunctuary.jpg";
 import logoImg from "@/assets/logo.png";
 // @ts-ignore
 import introVideo from "@/assets/videos/intro-video.mp4";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  getSiteSettings,
+  getHomepageContent,
+  getMapsUrls,
+} from "@/lib/content";
+
+/* ── Load CMS Content ──────────────────────────────────────── */
+
+const settings = getSiteSettings();
+const homepage = getHomepageContent();
+const { directionsUrl: DIRECTIONS_URL, embedUrl: EMBED_URL } = getMapsUrls(settings);
+
+const PHONE_DISPLAY = settings.phone_display;
+const PHONE_HREF = settings.phone_href;
+const INSTAGRAM_URL = settings.instagram_url;
+const YOUTUBE_URL = settings.youtube_url;
 
 /* ── Route meta (page-level overrides) ─────────────────────── */
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/")(({
   head: () => ({
     meta: [
       { title: "MercyLife Church Dominion Temple — Dallas, TX" },
@@ -46,31 +57,10 @@ export const Route = createFileRoute("/")({
         content:
           "Experience powerful worship, practical teaching, and a vibrant community at MercyLife Church. Services every Friday at 7:30 PM & Sunday at 10 AM in Dallas, TX.",
       },
-      { property: "og:image", content: heroImg },
-      {
-        property: "og:image:alt",
-        content: "Worship service at MercyLife Church Dominion Temple in Dallas, Texas",
-      },
-      { name: "twitter:image", content: heroImg },
-      {
-        name: "twitter:image:alt",
-        content: "Worship service at MercyLife Church Dominion Temple in Dallas, Texas",
-      },
     ],
   }),
   component: Index,
-});
-
-/* ── Constants ─────────────────────────────────────────────── */
-
-const ADDRESS = "3100 Pleasant Valley Ln, Arlington, TX 76015";
-const MAPS_QUERY = encodeURIComponent("MercyLife Church " + ADDRESS);
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}`;
-const EMBED_URL = `https://www.google.com/maps?q=${MAPS_QUERY}&output=embed`;
-const PHONE_DISPLAY = "(817) 677-1407";
-const PHONE_HREF = "tel:+18176771407";
-const INSTAGRAM_URL = "https://www.instagram.com/mercylife_dallas";
-const YOUTUBE_URL = "https://www.youtube.com/@brianamoatengtv";
+}) as any);
 
 /* ── Page Component ────────────────────────────────────────── */
 
@@ -102,6 +92,7 @@ function Index() {
 
 function Hero() {
   const [isPlaying, setIsPlaying] = useState(true);
+  const hero = homepage.hero;
 
   const togglePlay = () => {
     const video = document.getElementById("hero-bg-video") as HTMLVideoElement;
@@ -151,24 +142,22 @@ function Hero() {
         <div className="animate-fade-up">
           <div className="inline-flex items-stretch mb-8 glass-panel border border-white/20 rounded-full overflow-hidden p-1">
             <div className="bg-gradient-gold text-navy px-4 py-1.5 rounded-full font-sans text-[10px] tracking-[0.25em] uppercase font-bold flex items-center shadow-sm">
-              Dallas, TX
+              {hero.location_badge}
             </div>
             <div className="px-5 py-1.5 text-[10px] tracking-[0.25em] uppercase flex items-center font-semibold">
-              Fridays 7:30 PM &bull; Sundays 10:00 AM
+              {hero.schedule_badge}
             </div>
           </div>
 
           <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl text-primary-foreground leading-[1.05] tracking-tight">
-            Welcome to <span className="text-gold italic block sm:inline">MercyLife Church</span>
+            {hero.title_line1} <span className="text-gold italic block sm:inline">{hero.title_highlight}</span>
             <span className="block text-xl sm:text-2xl md:text-3xl mt-4 font-sans tracking-[0.2em] uppercase font-medium text-gold/80">
-              Dominion Temple
+              {hero.title_subtitle}
             </span>
           </h1>
 
           <p className="mt-8 text-lg md:text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed font-sans font-light">
-            Encounter God's presence, experience life-transforming grace, and build a lasting
-            community in Dallas, Texas. Whether you are exploring faith or looking for a home, you
-            belong here.
+            {hero.description}
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -178,7 +167,7 @@ function Hero() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-gold text-navy font-semibold shadow-gold hover:scale-[1.02] active:scale-[0.98] transition-all font-sans"
               aria-label="Plan your visit to MercyLife Church"
             >
-              Plan Your Visit <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              {hero.cta_primary} <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
             <a
               href={YOUTUBE_URL}
@@ -188,7 +177,7 @@ function Hero() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md active:scale-[0.98] transition-all font-sans"
               aria-label="Watch MercyLife Church sermons on YouTube"
             >
-              <Play className="w-4 h-4 text-gold fill-gold" aria-hidden="true" /> Watch Online
+              <Play className="w-4 h-4 text-gold fill-gold" aria-hidden="true" /> {hero.cta_secondary}
             </a>
           </div>
         </div>
@@ -221,6 +210,8 @@ function Hero() {
 }
 
 function Welcome() {
+  const about = homepage.about;
+
   return (
     <section
       className="py-24 md:py-32 bg-background relative overflow-hidden section-lazy"
@@ -239,17 +230,13 @@ function Welcome() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl text-navy mb-8 font-serif leading-[1.15]">
-            A Welcoming Christian Church in <span className="italic text-gold">Dallas, Texas</span>
+            {about.heading} <span className="italic text-gold">{about.heading_highlight}</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6 editorial-first-letter">
-            MercyLife Church Dominion Temple is a vibrant, faith-centered church located in the
-            Dallas–Fort Worth metroplex. We are passionate about helping people encounter God's
-            presence, grow in faith, and build meaningful relationships that last a lifetime.
+            {about.paragraph1}
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8 font-light">
-            Whether you're searching for churches in Dallas TX for the first time or looking for a
-            new church family, you'll find a warm community ready to walk alongside you on your
-            journey of faith.
+            {about.paragraph2}
           </p>
         </div>
         <div className="md:col-span-5 relative">
@@ -259,7 +246,7 @@ function Welcome() {
           />
           <div className="rounded-2xl overflow-hidden border border-gold/10 p-2 glass-panel shadow-material-2">
             <img
-              src={communityImg}
+              src={about.image}
               alt="MercyLife Church Dominion Temple community members greeting visitors at a Sunday worship service in Dallas, Texas"
               loading="lazy"
               decoding="async"
@@ -277,6 +264,8 @@ function Welcome() {
 /* ── Meet the Pastor ──────────────────────────────────────── */
 
 function Pastor() {
+  const pastor = homepage.pastor;
+
   return (
     <section
       className="py-24 md:py-32 bg-secondary/10 relative overflow-hidden section-lazy border-b border-border/40"
@@ -292,8 +281,8 @@ function Pastor() {
             <div className="absolute -inset-4 bg-gradient-gold rounded-2xl opacity-10 blur-xl pointer-events-none" />
             <div className="rounded-2xl overflow-hidden border border-gold/10 p-2 glass-panel shadow-material-3">
               <img
-                src={pastorBrianImg}
-                alt="Pastor Brian Amoateng"
+                src={pastor.image}
+                alt={`Pastor ${pastor.name}`}
                 loading="lazy"
                 decoding="async"
                 className="rounded-xl w-full h-[580px] object-cover"
@@ -302,12 +291,12 @@ function Pastor() {
             {/* Quick Badges list */}
             <div className="grid grid-cols-2 gap-4">
               <div className="glass-panel p-4 rounded-xl text-center border border-white/55 shadow-material-1">
-                <div className="text-gold font-serif text-2xl font-bold">25+</div>
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">Global Locations</div>
+                <div className="text-gold font-serif text-2xl font-bold">{pastor.stat1_value}</div>
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">{pastor.stat1_label}</div>
               </div>
               <div className="glass-panel p-4 rounded-xl text-center border border-white/55 shadow-material-1">
-                <div className="text-gold font-serif text-2xl font-bold">UN</div>
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">Goodwill Ambassador</div>
+                <div className="text-gold font-serif text-2xl font-bold">{pastor.stat2_value}</div>
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">{pastor.stat2_label}</div>
               </div>
             </div>
           </div>
@@ -317,43 +306,43 @@ function Pastor() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-8 h-[1px] bg-gold" />
-                <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Leadership</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">{pastor.label}</span>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl text-navy mb-4 font-serif leading-tight">
-                Meet Our Pastor, <span className="italic text-gold block sm:inline">Brian Amoateng</span>
+                Meet Our Pastor, <span className="italic text-gold block sm:inline">{pastor.name}</span>
               </h2>
               <p className="text-sm font-sans tracking-widest uppercase text-muted-foreground font-semibold">
-                Founder & Senior Pastor of MercyLife Churches Worldwide
+                {pastor.title}
               </p>
             </div>
 
             <div className="editorial-quote">
-              "Affectionately called the Endtime Revivalist, Pastor Brian is an endtime ministry gift dedicated to bringing hope and revival across the globe."
+              "{pastor.quote}"
             </div>
 
             <div className="space-y-6 text-muted-foreground font-light text-base leading-relaxed">
               <p className="editorial-first-letter">
-                Pastor Brian Amoateng is the President of Brian Jones Ministries (BJM), which seeks to bring hope and encouragement to hopeless lives through powerful revival. As the founder and Senior Pastor of MercyLife Churches Worldwide, he oversees a thriving ministry extending across more than 25 locations globally.
+                {pastor.bio_intro}
               </p>
               
               <div className="editorial-col-2 pt-6 border-t border-border/60">
                 <div>
                   <h4 className="font-serif text-lg text-navy mb-3 font-semibold">Global Influence</h4>
                   <p className="text-sm leading-relaxed mb-4">
-                    An author, life coach, philanthropist, and entrepreneur, Pastor Brian gives counsel and advice to several government and political figures across the world. He is appointed as a Goodwill Ambassador to UNACWA, serves as the CEO of the 424 Group of companies, and chairs the Brian Jones Foundation.
+                    {pastor.global_influence}
                   </p>
                   <p className="text-sm leading-relaxed">
-                    He is also the convener of Africa's largest youth gathering: **iYES (International Youth Empowerment Summit)**. He has been named the Most Influential Youth Leader in Ghana for 4 consecutive times, honored by the Mayor of Columbus, Ohio, and awarded the Head of State Award by the President of Ghana.
+                    {pastor.global_influence_2}
                   </p>
                 </div>
                 
                 <div>
                   <h4 className="font-serif text-lg text-navy mb-3 font-semibold">Prophetic Grace & Education</h4>
                   <p className="text-sm leading-relaxed mb-4">
-                    With a sharp and unique prophetic and healing ministry, his messages are practical, revelational, and simple, bringing change and salvation to countless lives.
+                    {pastor.prophetic_grace}
                   </p>
                   <p className="text-sm leading-relaxed">
-                    Pastor Brian holds a Diploma in Theology, a Bachelor's in Sociology from the University of Ghana, Legon, and a Master's in Human Resource Management & Employment Relations from Brunel University, UK. He is happily married to Abigail and blessed with three wonderful children.
+                    {pastor.education}
                   </p>
                 </div>
               </div>
@@ -436,19 +425,8 @@ function MissionVision() {
   const [lastSwipedIndex, setLastSwipedIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<"next" | "prev">("next");
 
-  const visions = [
-    "To raise leaders for global impact.",
-    "To enrich people to become influencers in their families, workplaces, and the world.",
-    "To restore and release the potential in people by connecting them to God.",
-    "To expose people to the hope and limitless potential they have in Jesus Christ.",
-    "To raise an army of young people finding their purpose in life, and radical for Christ.",
-    "To impact our communities by helping and providing support for the needy and less privileged.",
-    "To build a church where the lost, oppressed, and neglected will find love, forgiveness, healing, hope, and deliverance.",
-    "To build a multicultural and multinational church where everyone belongs and finds their unique expression.",
-    "To build mega churches for God and the nations.",
-    "To establish a network of churches across the Americas, Europe, and Africa.",
-    "To reach the world through traditional and new media avenues."
-  ];
+  const visions = homepage.vision;
+  const sanctuary = "/uploads/sunctuary.jpg";
 
   const handleNext = () => {
     if (isAnimating) return;
@@ -492,7 +470,7 @@ function MissionVision() {
                 <span className="text-[10px] tracking-[0.25em] uppercase text-gold font-bold">Our Mission</span>
               </div>
               <p className="font-serif text-xl md:text-2xl text-navy italic leading-relaxed font-semibold">
-                "To develop fully functioning followers of Christ and release them into their prophetic destinies, transforming communities and individuals."
+                "{homepage.mission}"
               </p>
             </div>
             
@@ -640,20 +618,8 @@ function MissionVision() {
 /* ── Services ─────────────────────────────────────────────── */
 
 function Services() {
-  const services = [
-    {
-      day: "Friday",
-      name: "Friday Night Worship",
-      time: "7:30 PM",
-      desc: "An intimate Friday night church service of worship, prayer, and the Word — the perfect way to end your week in Dallas.",
-    },
-    {
-      day: "Sunday",
-      name: "Sunday Morning Service",
-      time: "10:00 AM",
-      desc: "Powerful Sunday worship in Dallas, TX with practical teaching, vibrant praise, and a welcoming community for the whole family.",
-    },
-  ];
+  const services = settings.services;
+
   return (
     <section
       id="visit"
@@ -706,7 +672,7 @@ function Services() {
                 </div>
               </div>
               <p className="text-primary-foreground/75 font-light text-sm leading-relaxed">
-                {s.desc}
+                {s.description}
               </p>
             </div>
           ))}
@@ -770,9 +736,9 @@ function Location() {
                 MercyLife Church Dominion Temple
               </h3>
               <address className="not-italic text-primary-foreground/75 text-lg leading-relaxed mb-8 font-light">
-                3100 Pleasant Valley Ln
+                {settings.address_street}
                 <br />
-                Arlington, TX 76015
+                {settings.address_city}, {settings.address_state} {settings.address_zip}
               </address>
             </div>
             <div className="space-y-4">
@@ -798,7 +764,7 @@ function Location() {
           </div>
           <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-material-2 min-h-[420px] border border-border/60 p-2 bg-white/40 backdrop-blur-sm">
             <iframe
-              title="MercyLife Church Dominion Temple location — 3100 Pleasant Valley Ln, Arlington TX 76015"
+              title={`MercyLife Church Dominion Temple location — ${settings.address_full}`}
               src={EMBED_URL}
               width="100%"
               height="100%"
@@ -886,7 +852,7 @@ function Connect() {
   const socials = [
     {
       name: "Instagram",
-      handle: "@mercylife_dallas",
+      handle: settings.instagram_handle,
       cta: "Follow Us on Instagram",
       url: INSTAGRAM_URL,
       Icon: Instagram,
@@ -894,7 +860,7 @@ function Connect() {
     },
     {
       name: "YouTube",
-      handle: "@brianamoatengtv",
+      handle: settings.youtube_handle,
       cta: "Watch Messages & Subscribe",
       url: YOUTUBE_URL,
       Icon: Youtube,

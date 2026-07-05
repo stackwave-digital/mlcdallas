@@ -4,6 +4,7 @@ import { Calendar, MapPin, Clock, ArrowRight, Tag, Share2, Sparkles } from "luci
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
+import { getEvents, getSiteSettings, getMapsUrls } from "@/lib/content";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -25,98 +26,11 @@ export const Route = createFileRoute("/events")({
   component: EventsPage,
 });
 
-/* ── Constants & Helpers ───────────────────────────────────── */
+/* ── Load CMS Content ──────────────────────────────────────── */
 
-const ADDRESS = "3100 Pleasant Valley Ln, Arlington, TX 76015";
-const MAPS_QUERY = encodeURIComponent("MercyLife Church " + ADDRESS);
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}`;
-
-interface ChurchEvent {
-  id: string;
-  title: string;
-  category: "Worship" | "Community" | "Youth" | "Special";
-  date: string;
-  rawDate: string; // Used for order
-  time: string;
-  location: string;
-  speaker?: string;
-  description: string;
-  isFeatured?: boolean;
-}
-
-const EVENTS_DATA: ChurchEvent[] = [
-  {
-    id: "evt-friday-power",
-    title: "Friday Night Power & Worship",
-    category: "Worship",
-    date: "Every Friday",
-    rawDate: "Recurring",
-    time: "7:30 PM",
-    location: "Main Sanctuary",
-    speaker: "Pastor Brian Amoateng",
-    description: "End your week in the presence of God. Join us for a powerful evening of deep worship, prophetic prayers, and life-altering word. A sanctuary where burdens are lifted.",
-    isFeatured: true,
-  },
-  {
-    id: "evt-sunday-service",
-    title: "Sunday Dominion Service",
-    category: "Worship",
-    date: "Every Sunday",
-    rawDate: "Recurring",
-    time: "10:00 AM",
-    location: "Main Sanctuary",
-    speaker: "Pastor Brian Amoateng",
-    description: "Start your week in victory! Experience a vibrant celebration featuring uplifting praise, special choir performances, and dynamic teachings designed to equip you for dominion.",
-    isFeatured: true,
-  },
-  {
-    id: "evt-youth-ignite",
-    title: "Youth Ignite Conference 2026",
-    category: "Youth",
-    date: "July 17, 2026",
-    rawDate: "2026-07-17",
-    time: "6:30 PM - 9:30 PM",
-    location: "Youth Center",
-    speaker: "Special Guest Speakers",
-    description: "A gathering focused on empowering the next generation. Join hundreds of youth for passionate worship, interactive workshops, and panel sessions discussing purpose, career, and faith.",
-    isFeatured: false,
-  },
-  {
-    id: "evt-mercy-night",
-    title: "Night of Mercy & Breakthrough",
-    category: "Special",
-    date: "July 31, 2026",
-    rawDate: "2026-07-31",
-    time: "9:00 PM - 1:00 AM",
-    location: "Main Sanctuary & Lawn",
-    speaker: "Pastor Brian Amoateng",
-    description: "Our quarterly half-night service. A dedicated time of intense intercession, hands-on ministration, and prophetic declarations. Come expecting a touch from heaven.",
-    isFeatured: true,
-  },
-  {
-    id: "evt-summer-outreach",
-    title: "Dallas Community Outreach",
-    category: "Community",
-    date: "August 8, 2026",
-    rawDate: "2026-08-08",
-    time: "9:00 AM - 1:00 PM",
-    location: "Pleasant Valley Park",
-    description: "Showing God's love in action. We are partnering with local food banks to distribute groceries, provide free health checks, and host fun games for neighborhood children.",
-    isFeatured: false,
-  },
-  {
-    id: "evt-lead-summit",
-    title: "Leadership Empowerment Summit",
-    category: "Special",
-    date: "August 22, 2026",
-    rawDate: "2026-08-22",
-    time: "10:00 AM - 3:00 PM",
-    location: "Dominion Conference Room",
-    speaker: "Leadership Council",
-    description: "A equipping summit for all ministers, group heads, and aspiring leaders. Learn core methodologies on volunteer administration, pastoral care, and execution of church operations.",
-    isFeatured: false,
-  },
-];
+const EVENTS_DATA = getEvents();
+const settings = getSiteSettings();
+const { directionsUrl: DIRECTIONS_URL } = getMapsUrls(settings);
 
 /* ── Main Component ────────────────────────────────────────── */
 

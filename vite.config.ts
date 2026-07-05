@@ -1,10 +1,6 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - tanstackStart, viteReact, tailwindcss, tsConfigPaths, nitro (build-only using cloudflare as a default target),
-//     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,
-//     error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import fs from "node:fs";
+import path from "node:path";
 
 export default defineConfig({
   tanstackStart: {
@@ -16,4 +12,23 @@ export default defineConfig({
   nitro: {
     preset: "netlify",
   },
+  plugins: [
+    {
+      name: "serve-static-admin-bypass",
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          const url = req.url ? req.url.split("?")[0] : "";
+          if (url === "/admin" || url === "/admin/" || url === "/admin/index.html") {
+            const filePath = path.join(process.cwd(), "public", "admin", "index.html");
+            if (fs.existsSync(filePath)) {
+              res.setHeader("Content-Type", "text/html");
+              res.end(fs.readFileSync(filePath));
+              return;
+            }
+          }
+          next();
+        });
+      },
+    },
+  ],
 });

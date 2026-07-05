@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "location_badge": "Dallas, TX",
+    "schedule_badge": "Fridays 7:30 PM • Sundays 10:00 AM",
+    "title_line1": "Welcome to",
+    "title_highlight": "MercyLife Church",
+    "title_subtitle": "Dominion Temple",
+    "description": "Encounter God's presence, experience life-transforming grace, and build a lasting community in Dallas, Texas. Whether you are exploring faith or looking for a home, you belong here.",
+    "cta_primary": "Plan Your Visit",
+    "cta_secondary": "Watch Online"
+  },
+  "about": {
+    "heading": "A Welcoming Christian Church in",
+    "heading_highlight": "Dallas, Texas",
+    "paragraph1": "MercyLife Church Dominion Temple is a vibrant, faith-centered church located in the Dallas–Fort Worth metroplex. We are passionate about helping people encounter God's presence, grow in faith, and build meaningful relationships that last a lifetime.",
+    "paragraph2": "Whether you're searching for churches in Dallas TX for the first time or looking for a new church family, you'll find a warm community ready to walk alongside you on your journey of faith.",
+    "image": "/uploads/community-welcome.jpeg"
+  },
+  "pastor": {
+    "label": "Leadership",
+    "name": "Brian Amoateng",
+    "title": "Founder & Senior Pastor of MercyLife Churches Worldwide",
+    "quote": "Affectionately called the Endtime Revivalist, Pastor Brian is an endtime ministry gift dedicated to bringing hope and revival across the globe.",
+    "bio_intro": "Pastor Brian Amoateng is the President of Brian Jones Ministries (BJM), which seeks to bring hope and encouragement to hopeless lives through powerful revival. As the founder and Senior Pastor of MercyLife Churches Worldwide, he oversees a thriving ministry extending across more than 25 locations globally.",
+    "global_influence": "An author, life coach, philanthropist, and entrepreneur, Pastor Brian gives counsel and advice to several government and political figures across the world. He is appointed as a Goodwill Ambassador to UNACWA, serves as the CEO of the 424 Group of companies, and chairs the Brian Jones Foundation.",
+    "global_influence_2": "He is also the convener of Africa's largest youth gathering: **iYES (International Youth Empowerment Summit)**. He has been named the Most Influential Youth Leader in Ghana for 4 consecutive times, honored by the Mayor of Columbus, Ohio, and awarded the Head of State Award by the President of Ghana.",
+    "prophetic_grace": "With a sharp and unique prophetic and healing ministry, his messages are practical, revelational, and simple, bringing change and salvation to countless lives.",
+    "education": "Pastor Brian holds a Diploma in Theology, a Bachelor's in Sociology from the University of Ghana, Legon, and a Master's in Human Resource Management & Employment Relations from Brunel University, UK. He is happily married to Abigail and blessed with three wonderful children.",
+    "image": "/uploads/pastor-brian.jpeg",
+    "stat1_value": "25+",
+    "stat1_label": "Global Locations",
+    "stat2_value": "UN",
+    "stat2_label": "Goodwill Ambassador"
+  },
+  "mission": "To develop fully functioning followers of Christ and release them into their prophetic destinies, transforming communities and individuals.",
+  "vision": [
+    "To raise leaders for global impact.",
+    "To enrich people to become influencers in their families, workplaces, and the world.",
+    "To restore and release the potential in people by connecting them to God.",
+    "To expose people to the hope and limitless potential they have in Jesus Christ.",
+    "To raise an army of young people finding their purpose in life, and radical for Christ.",
+    "To impact our communities by helping and providing support for the needy and less privileged.",
+    "To build a church where the lost, oppressed, and neglected will find love, forgiveness, healing, hope, and deliverance.",
+    "To build a multicultural and multinational church where everyone belongs and finds their unique expression.",
+    "To build mega churches for God and the nations.",
+    "To establish a network of churches across the Americas, Europe, and Africa.",
+    "To reach the world through traditional and new media avenues."
+  ]
+}

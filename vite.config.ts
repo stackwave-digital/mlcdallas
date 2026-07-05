@@ -12,6 +12,11 @@ export default defineConfig({
   nitro: {
     preset: "netlify",
   },
+  vite: {
+    server: {
+      port: 3000,
+    },
+  },
   plugins: [
     {
       name: "serve-static-admin-bypass",

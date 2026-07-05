@@ -163,6 +163,8 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en" dir="ltr">
       <head>
         <HeadContent />
+        {/* Netlify Identity Widget — required for Decap CMS admin login */}
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
       </head>
       <body>
         {/* Skip-to-content link for keyboard / screen-reader users */}
@@ -174,6 +176,22 @@ function RootShell({ children }: { children: ReactNode }) {
         </a>
         {children}
         <Scripts />
+        {/* Redirect users to /admin/ after confirming their identity via email */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.netlifyIdentity) {
+                window.netlifyIdentity.on("init", function(user) {
+                  if (!user) {
+                    window.netlifyIdentity.on("login", function() {
+                      document.location.href = "/admin/";
+                    });
+                  }
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );

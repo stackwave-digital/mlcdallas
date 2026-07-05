@@ -1,0 +1,27 @@
+{
+  "phone_display": "(817) 677-1407",
+  "phone_href": "tel:+18176771407",
+  "address_street": "3100 Pleasant Valley Ln",
+  "address_city": "Arlington",
+  "address_state": "TX",
+  "address_zip": "76015",
+  "address_full": "3100 Pleasant Valley Ln, Arlington, TX 76015",
+  "instagram_url": "https://www.instagram.com/mercylife_dallas",
+  "instagram_handle": "@mercylife_dallas",
+  "youtube_url": "https://www.youtube.com/@brianamoatengtv",
+  "youtube_handle": "@brianamoatengtv",
+  "services": [
+    {
+      "day": "Friday",
+      "name": "Friday Night Worship",
+      "time": "7:30 PM",
+      "description": "An intimate Friday night church service of worship, prayer, and the Word — the perfect way to end your week in Dallas."
+    },
+    {
+      "day": "Sunday",
+      "name": "Sunday Morning Service",
+      "time": "10:00 AM",
+      "description": "Powerful Sunday worship in Dallas, TX with practical teaching, vibrant praise, and a welcoming community for the whole family."
+    }
+  ]
+}

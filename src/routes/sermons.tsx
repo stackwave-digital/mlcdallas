@@ -11,11 +11,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
-
-import sermonCoverFaith from "@/assets/sermon_series_faith.png";
-import worshipExperience from "@/assets/worship_experience.jpg";
-import youthFellowship from "@/assets/youth.jpg";
-import churchArchitecture from "@/assets/sunctuary.jpg";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { getSermons, type Sermon } from "@/lib/content";
 
 export const Route = createFileRoute("/sermons")({
   head: () => ({
@@ -32,137 +29,14 @@ export const Route = createFileRoute("/sermons")({
         content:
           "Watch recent messages, study scripture, and download sermon notes from MercyLife Church Dominion Temple in Dallas, TX. Grow your faith.",
       },
-      { property: "og:image", content: sermonCoverFaith },
     ],
   }),
   component: Sermons,
 });
 
-/* ── Data ──────────────────────────────────────────────────── */
+/* ── Load CMS Content ──────────────────────────────────────── */
 
-interface Sermon {
-  id: string;
-  youtubeId: string;
-  title: string;
-  preacher: string;
-  series: string;
-  date: string;
-  scripture: string;
-  cover: string;
-  duration: string;
-  notes: {
-    outline: string[];
-    scriptures: string[];
-    reflection: string[];
-  };
-}
-
-const SERMONS_DATA: Sermon[] = [
-  {
-    id: "sermon-1",
-    youtubeId: "Y8y6nQn_oHw", // Pastor Brian Amoateng video ID
-    title: "Walking in Divine Authority",
-    preacher: "Pastor Brian Amoateng",
-    series: "Walk in Dominion",
-    date: "June 28, 2026",
-    scripture: "Luke 10:19, Ephesians 1:20-22",
-    cover: sermonCoverFaith,
-    duration: "42:15",
-    notes: {
-      outline: [
-        "The Source of Authority: All authority flows directly from Christ's finished work on the cross and His resurrection victory.",
-        "The Scope of Authority: Believers have been delegated dominion over all the power of the enemy, not some of it.",
-        "The Exercise of Authority: True dominion requires active engagement — speaking the Word in faith, taking action, and standing firm.",
-      ],
-      scriptures: [
-        "Luke 10:19 — 'Behold, I give you the authority to trample on serpents and scorpions, and over all the power of the enemy, and nothing shall by any means hurt you.'",
-        "Ephesians 1:21-22 — 'Far above all principality and power and might and dominion... And He put all things under His feet...'",
-      ],
-      reflection: [
-        "In what specific areas of your life (family, career, mental state) do you need to actively exercise the authority Christ has given you?",
-        "How does knowing that Christ has already put all things under His feet change your perspective on the obstacles you face today?",
-      ],
-    },
-  },
-  {
-    id: "sermon-2",
-    youtubeId: "tWv-e9Y_1W8",
-    title: "The Power of Persistent Prayer",
-    preacher: "Pastor Brian Amoateng",
-    series: "Prayer & Power",
-    date: "June 21, 2026",
-    scripture: "Luke 18:1-8, James 5:16-18",
-    cover: worshipExperience,
-    duration: "38:40",
-    notes: {
-      outline: [
-        "The Purpose of Prayer: Prayer is first and foremost about intimacy and alignment with God's heart rather than transactional requests.",
-        "The Principle of Persistence: Delays are not denials. Persistence in prayer builds spiritual capacity and tests our reliance on God.",
-        "The Promising Result: Fervent, heartfelt prayer moves heaven and opens gates of breakthroughs in the physical realm.",
-      ],
-      scriptures: [
-        "Luke 18:1 — 'Then He spoke a parable to them, that men always ought to pray and not lose heart.'",
-        "James 5:16 — 'The effective, fervent prayer of a righteous man avails much.'",
-      ],
-      reflection: [
-        "Are you currently discouraged by a delayed answer to prayer? How can you shift your mindset from 'giving up' to 'persistent trust'?",
-        "What does it mean to pray 'fervently' from a place of righteousness, and how can we cultivate this type of prayer life?",
-      ],
-    },
-  },
-  {
-    id: "sermon-3",
-    youtubeId: "LpY7gqLSwxQ",
-    title: "Grace for the Next Season",
-    preacher: "Pastor Brian Amoateng",
-    series: "Grace Abounding",
-    date: "June 14, 2026",
-    scripture: "2 Corinthians 12:7-10, Romans 5:1-5",
-    cover: youthFellowship,
-    duration: "45:20",
-    notes: {
-      outline: [
-        "Grace in Our Weakness: When we reach the limit of our own human strength, God's grace steps in to sustain and lift us.",
-        "Grace for Transition: Every new season requires a fresh supply of divine grace. We cannot successfully navigate tomorrow with yesterday's strength.",
-        "Boasting in Weakness: Shifting our focus away from self-sufficiency allows Christ's power to rest upon us fully.",
-      ],
-      scriptures: [
-        "2 Corinthians 12:9 — 'And He said to me, \"My grace is sufficient for you, for My strength is made perfect in weakness.\"'",
-        "Romans 5:2 — 'Through whom also we have access by faith into this grace in which we stand...'",
-      ],
-      reflection: [
-        "Which areas of transition are you currently struggling to control with your own strength? How can you yield those to God's grace?",
-        "How can we practically make 'weakness' a platform for God's glory instead of a source of constant frustration?",
-      ],
-    },
-  },
-  {
-    id: "sermon-4",
-    youtubeId: "_U1-a4F4Y74",
-    title: "Living in the Blessing of Covenant",
-    preacher: "Pastor Brian Amoateng",
-    series: "Covenant Promises",
-    date: "June 7, 2026",
-    scripture: "Deuteronomy 8:18, Galatians 3:13-14",
-    cover: churchArchitecture,
-    duration: "51:10",
-    notes: {
-      outline: [
-        "Understanding Covenant: God's covenant is an unshakeable, binding commitment of blessing, protection, and provision.",
-        "The Power to Get Wealth: The blessing is not just for survival, but to establish God's covenant on the earth through generosity.",
-        "Redeemed from the Curse: Through Christ, the curse of limitation is broken, and the blessing of Abraham is unlocked for all believers.",
-      ],
-      scriptures: [
-        "Deuteronomy 8:18 — 'And you shall remember the Lord your God, for it is He who gives you power to get wealth, that He may establish His covenant...'",
-        "Galatians 3:13-14 — 'Christ has redeemed us from the curse... that the blessing of Abraham might come upon the Gentiles in Christ Jesus...'",
-      ],
-      reflection: [
-        "Do you view your finances and resources through the lens of survival, or through the covenant purpose of establishing God's kingdom?",
-        "How does understanding that you are redeemed from the curse of limitation affect your prayers and steps of faith?",
-      ],
-    },
-  },
-];
+const SERMONS_DATA = getSermons();
 
 /* ── Component ─────────────────────────────────────────────── */
 

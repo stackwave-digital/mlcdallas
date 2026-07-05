@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight, ZoomIn, Calendar, Tag, ArrowLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn, Calendar, Tag } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -13,14 +13,7 @@ import {
 } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
-
-import worshipExperience from "@/assets/worship_experience.jpg";
-import youthFellowship from "@/assets/youth.jpg";
-import churchArchitecture from "@/assets/sunctuary.jpg";
-import pbAndMinisters from "@/assets/pb-and-ministers.jpeg";
-import communityWelcome from "@/assets/community-welcome.jpeg";
-import communityWelcome1 from "@/assets/community-welcome-1.jpg";
-import heroWorship from "@/assets/adoration.jpg";
+import { getGalleryImages } from "@/lib/content";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -37,74 +30,15 @@ export const Route = createFileRoute("/gallery")({
         content:
           "Explore photos of worship, fellowship, and events at MercyLife Church Dominion Temple in Dallas, TX. Experience our community in action.",
       },
-      { property: "og:image", content: worshipExperience },
     ],
   }),
   component: Gallery,
 });
 
-/* ── Data ──────────────────────────────────────────────────── */
+/* ── Load CMS Content ──────────────────────────────────────── */
 
-const CATEGORIES = ["All", "Worship", "Community", "Sanctuary"];
-
-const GALLERY_IMAGES = [
-  {
-    id: "img1",
-    src: worshipExperience,
-    title: "Vibrant Friday Night Worship",
-    category: "Worship",
-    date: "June 2026",
-    desc: "Our congregation gathering for a powerful night of praise and worship in the presence of God.",
-  },
-  {
-    id: "img2",
-    src: youthFellowship,
-    title: "Youth Fellowship & Coffee",
-    category: "Community",
-    date: "May 2026",
-    desc: "A warm afternoon fellowship with our youth ministry team, sharing stories and growing together.",
-  },
-  {
-    id: "img3",
-    src: churchArchitecture,
-    title: "The Main Sanctuary",
-    category: "Sanctuary",
-    date: "April 2026",
-    desc: "The peaceful architecture of the Dominion Temple sanctuary before the start of Sunday service.",
-  },
-  {
-    id: "img4",
-    src: pbAndMinisters,
-    title: "Leadership & Ministers",
-    category: "Community",
-    date: "May 2026",
-    desc: "Our pastoral leadership team and ministers greeting the congregation during a special event.",
-  },
-  {
-    id: "img5",
-    src: communityWelcome,
-    title: "Sunday Morning Fellowship",
-    category: "Community",
-    date: "April 2026",
-    desc: "Welcoming faces in our foyer, sharing smiles before the service starts.",
-  },
-  {
-    id: "img6",
-    src: communityWelcome1,
-    title: "Community Growth Groups",
-    category: "Community",
-    date: "March 2026",
-    desc: "Members of our small groups connecting and discussing the Word in Arlington.",
-  },
-  {
-    id: "img7",
-    src: heroWorship,
-    title: "Praise & Adoration",
-    category: "Worship",
-    date: "February 2026",
-    desc: "Passionate worship leaders leading the congregation during Sunday Morning Service.",
-  },
-];
+const GALLERY_IMAGES = getGalleryImages();
+const CATEGORIES = ["All", ...Array.from(new Set(GALLERY_IMAGES.map((img) => img.category)))];
 
 /* ── Component ─────────────────────────────────────────────── */
 

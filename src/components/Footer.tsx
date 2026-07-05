@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube } from "lucide-react";
 import logoImg from "../assets/logo.png";
+import { getSiteSettings } from "@/lib/content";
 
-const PHONE_DISPLAY = "(817) 677-1407";
-const PHONE_HREF = "tel:+18176771407";
-const INSTAGRAM_URL = "https://www.instagram.com/mercylife_dallas";
-const YOUTUBE_URL = "https://www.youtube.com/@brianamoatengtv";
+const settings = getSiteSettings();
+const PHONE_DISPLAY = settings.phone_display;
+const PHONE_HREF = settings.phone_href;
+const INSTAGRAM_URL = settings.instagram_url;
+const YOUTUBE_URL = settings.youtube_url;
 
 export default function Footer() {
   return (
@@ -32,9 +34,9 @@ export default function Footer() {
             </span>
           </Link>
           <address className="not-italic text-primary-foreground/70 leading-relaxed">
-            3100 Pleasant Valley Ln
+            {settings.address_street}
             <br />
-            Arlington, TX 76015
+            {settings.address_city}, {settings.address_state} {settings.address_zip}
           </address>
           <a
             href={PHONE_HREF}
@@ -97,8 +99,9 @@ export default function Footer() {
           <div>
             <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4">Service Times</div>
             <ul className="space-y-2 text-primary-foreground/80 text-sm">
-              <li>Friday Worship: <span className="text-gold">7:30 PM</span></li>
-              <li>Sunday Service: <span className="text-gold">10:00 AM</span></li>
+              {settings.services.map((s) => (
+                <li key={s.day}>{s.name}: <span className="text-gold">{s.time}</span></li>
+              ))}
             </ul>
 
             <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4 mt-6">Follow</div>

@@ -23,11 +23,7 @@ import introVideo from "@/assets/videos/intro-video.mp4";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import {
-  getSiteSettings,
-  getHomepageContent,
-  getMapsUrls,
-} from "@/lib/content";
+import { getSiteSettings, getHomepageContent, getMapsUrls, getEvents } from "@/lib/content";
 
 /* ── Load CMS Content ──────────────────────────────────────── */
 
@@ -42,7 +38,7 @@ const YOUTUBE_URL = settings.youtube_url;
 
 /* ── Route meta (page-level overrides) ─────────────────────── */
 
-export const Route = createFileRoute("/")(({
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "MercyLife Church Dominion Temple — Dallas, TX" },
@@ -60,7 +56,7 @@ export const Route = createFileRoute("/")(({
     ],
   }),
   component: Index,
-}) as any);
+} as any);
 
 /* ── Page Component ────────────────────────────────────────── */
 
@@ -74,6 +70,7 @@ function Index() {
         <Pastor />
         <WhatToExpect />
         <MissionVision />
+        <HomeEvents />
         <Services />
         <Location />
         <Contact />
@@ -150,7 +147,8 @@ function Hero() {
           </div>
 
           <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl text-primary-foreground leading-[1.05] tracking-tight">
-            {hero.title_line1} <span className="text-gold italic block sm:inline">{hero.title_highlight}</span>
+            {hero.title_line1}{" "}
+            <span className="text-gold italic block sm:inline">{hero.title_highlight}</span>
             <span className="block text-xl sm:text-2xl md:text-3xl mt-4 font-sans tracking-[0.2em] uppercase font-medium text-gold/80">
               {hero.title_subtitle}
             </span>
@@ -177,7 +175,8 @@ function Hero() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md active:scale-[0.98] transition-all font-sans"
               aria-label="Watch MercyLife Church sermons on YouTube"
             >
-              <Play className="w-4 h-4 text-gold fill-gold" aria-hidden="true" /> {hero.cta_secondary}
+              <Play className="w-4 h-4 text-gold fill-gold" aria-hidden="true" />{" "}
+              {hero.cta_secondary}
             </a>
           </div>
         </div>
@@ -268,7 +267,7 @@ function Pastor() {
 
   return (
     <section
-      className="py-24 md:py-32 bg-secondary/10 relative overflow-hidden section-lazy border-b border-border/40"
+      className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden section-lazy border-b border-border/40"
       aria-label="About our Senior Pastor"
     >
       <div className="absolute left-0 top-1/4 w-80 h-80 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
@@ -292,11 +291,15 @@ function Pastor() {
             <div className="grid grid-cols-2 gap-4">
               <div className="glass-panel p-4 rounded-xl text-center border border-white/55 shadow-material-1">
                 <div className="text-gold font-serif text-2xl font-bold">{pastor.stat1_value}</div>
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">{pastor.stat1_label}</div>
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">
+                  {pastor.stat1_label}
+                </div>
               </div>
               <div className="glass-panel p-4 rounded-xl text-center border border-white/55 shadow-material-1">
                 <div className="text-gold font-serif text-2xl font-bold">{pastor.stat2_value}</div>
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">{pastor.stat2_label}</div>
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1 font-semibold">
+                  {pastor.stat2_label}
+                </div>
               </div>
             </div>
           </div>
@@ -306,44 +309,38 @@ function Pastor() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-8 h-[1px] bg-gold" />
-                <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">{pastor.label}</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
+                  {pastor.label}
+                </span>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl text-navy mb-4 font-serif leading-tight">
-                Meet Our Pastor, <span className="italic text-gold block sm:inline">{pastor.name}</span>
+                Meet Our Pastor,{" "}
+                <span className="italic text-gold block sm:inline">{pastor.name}</span>
               </h2>
               <p className="text-sm font-sans tracking-widest uppercase text-muted-foreground font-semibold">
                 {pastor.title}
               </p>
             </div>
 
-            <div className="editorial-quote">
-              "{pastor.quote}"
-            </div>
+            <div className="editorial-quote">"{pastor.quote}"</div>
 
             <div className="space-y-6 text-muted-foreground font-light text-base leading-relaxed">
-              <p className="editorial-first-letter">
-                {pastor.bio_intro}
-              </p>
-              
+              <p className="editorial-first-letter">{pastor.bio_intro}</p>
+
               <div className="editorial-col-2 pt-6 border-t border-border/60">
                 <div>
-                  <h4 className="font-serif text-lg text-navy mb-3 font-semibold">Global Influence</h4>
-                  <p className="text-sm leading-relaxed mb-4">
-                    {pastor.global_influence}
-                  </p>
-                  <p className="text-sm leading-relaxed">
-                    {pastor.global_influence_2}
-                  </p>
+                  <h4 className="font-serif text-lg text-navy mb-3 font-semibold">
+                    Global Influence
+                  </h4>
+                  <p className="text-sm leading-relaxed mb-4">{pastor.global_influence}</p>
+                  <p className="text-sm leading-relaxed">{pastor.global_influence_2}</p>
                 </div>
-                
                 <div>
-                  <h4 className="font-serif text-lg text-navy mb-3 font-semibold">Prophetic Grace & Education</h4>
-                  <p className="text-sm leading-relaxed mb-4">
-                    {pastor.prophetic_grace}
-                  </p>
-                  <p className="text-sm leading-relaxed">
-                    {pastor.education}
-                  </p>
+                  <h4 className="font-serif text-lg text-navy mb-3 font-semibold">
+                    Prophetic Grace & Education
+                  </h4>
+                  <p className="text-sm leading-relaxed mb-4">{pastor.prophetic_grace}</p>
+                  <p className="text-sm leading-relaxed">{pastor.education}</p>
                 </div>
               </div>
             </div>
@@ -377,7 +374,7 @@ function WhatToExpect() {
 
   return (
     <section
-      className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden border-y border-border/40 section-lazy"
+      className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden border-y border-border/40 section-lazy hidden"
       aria-label="What to expect at MercyLife Church"
     >
       <div className="max-w-7xl mx-auto px-6 relative">
@@ -467,13 +464,14 @@ function MissionVision() {
             <div className="glass-panel p-8 rounded-2xl border border-gold/25 shadow-material-2">
               <div className="flex items-center gap-3 mb-4">
                 <span className="w-6 h-[1px] bg-gold" />
-                <span className="text-[10px] tracking-[0.25em] uppercase text-gold font-bold">Our Mission</span>
+                <span className="text-[10px] tracking-[0.25em] uppercase text-gold font-bold">
+                  Our Mission
+                </span>
               </div>
               <p className="font-serif text-xl md:text-2xl text-navy italic leading-relaxed font-semibold">
                 "{homepage.mission}"
               </p>
             </div>
-            
             <div className="rounded-2xl overflow-hidden border border-border/40 p-2 bg-white/50 shadow-material-2 relative group flex-grow min-h-[250px] flex items-center">
               <div className="w-full h-full relative rounded-xl overflow-hidden">
                 <img
@@ -497,13 +495,16 @@ function MissionVision() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-8 h-[1px] bg-gold" />
-                <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Our Vision</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
+                  Our Vision
+                </span>
               </div>
               <h2 className="text-4xl md:text-5xl text-navy font-serif mb-4 leading-tight">
                 Our Vision for <span className="italic text-gold">the Future</span>
               </h2>
               <p className="text-muted-foreground text-base font-light mb-10 max-w-xl leading-relaxed">
-                We believe in raising leaders for global impact and building a church where everyone belongs and finds their unique expression.
+                We believe in raising leaders for global impact and building a church where everyone
+                belongs and finds their unique expression.
               </p>
             </div>
 
@@ -522,7 +523,8 @@ function MissionVision() {
                   let animationClass = "";
 
                   if (isSwiped) {
-                    animationClass = direction === "next" ? "animate-card-back-left" : "animate-card-back-right";
+                    animationClass =
+                      direction === "next" ? "animate-card-back-left" : "animate-card-back-right";
                     cardStyle = {
                       transition: "none",
                     };
@@ -530,9 +532,16 @@ function MissionVision() {
                     const targetOffset = isAnimating ? Math.max(0, offset - 1) : offset;
                     const scale = 1 - targetOffset * 0.045;
                     const translateY = targetOffset * 18;
-                    const opacity = targetOffset === 3
-                      ? (isAnimating ? 0.6 : 0)
-                      : (targetOffset === 2 ? 0.6 : (targetOffset === 1 ? 0.9 : 1));
+                    const opacity =
+                      targetOffset === 3
+                        ? isAnimating
+                          ? 0.6
+                          : 0
+                        : targetOffset === 2
+                          ? 0.6
+                          : targetOffset === 1
+                            ? 0.9
+                            : 1;
 
                     cardStyle = {
                       transform: `translate3d(0px, ${translateY}px, 0px) scale(${scale})`,
@@ -573,7 +582,8 @@ function MissionVision() {
               {/* Progress Line */}
               <div className="flex items-center gap-4">
                 <span className="text-xs text-muted-foreground font-serif tracking-wider font-semibold">
-                  {String(activeIndex + 1).padStart(2, "0")} / {String(visions.length).padStart(2, "0")}
+                  {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                  {String(visions.length).padStart(2, "0")}
                 </span>
                 <div className="flex-grow h-[3px] bg-muted/40 rounded-full overflow-hidden">
                   <div
@@ -1020,4 +1030,210 @@ function StickyMobileCTA() {
       </a>
     </div>
   );
+}
+
+function HomeEvents() {
+  const events = getEvents();
+  // Find first featured event, or use the first event as featured fallback
+  const featuredEvent = events.find((e) => e.isFeatured) || events[0];
+  // Filter out the featured event from the upcoming list so it's not duplicated
+  const upcomingEvents = events.filter((e) => e.id !== featuredEvent?.id);
+
+  return (
+    <section className="py-24 md:py-32 bg-[#090D16] text-white relative overflow-hidden">
+      {/* Editorial Grid lines for aesthetics */}
+      <div
+        className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto"
+        aria-hidden="true"
+      >
+        <div className="w-[1px] bg-white h-full"></div>
+        <div className="w-[1px] bg-white h-full hidden sm:block"></div>
+        <div className="w-[1px] bg-white h-full hidden md:block"></div>
+        <div className="w-[1px] bg-white h-full"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        {/* Featured Event Section */}
+        {featuredEvent && (
+          <div className="mb-24">
+            <div className="text-center mb-12">
+              <h2 className="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">
+                FEATURED EVENT
+              </h2>
+              <p className="text-sm text-gray-400 font-sans animate-fade-in">
+                The moment you don't want to miss.
+              </p>
+            </div>
+
+            <div className="max-w-5xl mx-auto">
+              <div className="rounded-3xl bg-white/[0.03] border border-white/10 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 backdrop-blur-md hover:border-gold/30 transition-all duration-500 hover:shadow-elegant">
+                {featuredEvent.image && (
+                  <div className="w-full md:w-[380px] aspect-[16/10] rounded-2xl overflow-hidden shrink-0 border border-white/5">
+                    <img
+                      src={featuredEvent.image}
+                      alt={featuredEvent.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex-1 text-left space-y-4">
+                  <h3 className="text-2xl md:text-3xl font-serif text-white font-semibold uppercase tracking-wide leading-tight">
+                    {featuredEvent.title}
+                  </h3>
+                  <div className="flex flex-col gap-2 text-xs text-gold font-sans font-medium uppercase tracking-wider">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-gold/80" />
+                      <span>{featuredEvent.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-gold/80" />
+                      <span>{featuredEvent.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <MapPin className="w-4 h-4 text-gold/80" />
+                      <span>{featuredEvent.location}</span>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 text-sm font-sans font-light leading-relaxed">
+                    {featuredEvent.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Upcoming Events Section */}
+        {upcomingEvents.length > 0 && (
+          <div>
+            <div className="relative mb-16 text-center">
+              <h3 className="relative z-10 text-3xl md:text-5xl font-serif text-white leading-tight">
+                UPCOMING <span className="text-gold italic">EVENTS</span>
+              </h3>
+              <p className="relative z-10 text-xs text-gray-400 uppercase tracking-widest mt-3">
+                Discover what fits your season and join our community.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {upcomingEvents.map((evt) => {
+                const { month, day } = parseEventDate(evt.date);
+                return (
+                  <div
+                    key={evt.id}
+                    className="group bg-white/[0.02] border border-white/5 p-2 rounded-3xl overflow-hidden hover:border-gold/20 hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-1 shadow-elegant flex flex-col justify-between"
+                  >
+                    <div>
+                      {evt.image ? (
+                        <div className="aspect-[16/9] w-full rounded-2xl overflow-hidden relative">
+                          <img
+                            src={evt.image}
+                            alt={evt.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </div>
+                      ) : (
+                        <div className="aspect-[16/9] w-full rounded-2xl bg-navy-deep/40 flex items-center justify-center">
+                          <Calendar className="w-10 h-10 text-gold/30" />
+                        </div>
+                      )}
+
+                      {/* Card details block */}
+                      <div className="p-5 flex gap-4 items-start">
+                        {/* Left Side: Date Box */}
+                        <div className="flex flex-col items-center justify-center border border-white/10 rounded-xl px-3 py-2 shrink-0 bg-white/[0.02] min-w-[56px]">
+                          <span className="text-[10px] text-gray-400 font-sans tracking-wider uppercase font-semibold">
+                            {month}
+                          </span>
+                          <span className="text-2xl text-white font-sans font-bold tracking-tight mt-0.5">
+                            {day}
+                          </span>
+                        </div>
+
+                        {/* Right Side: Title, Time, Location */}
+                        <div className="space-y-3 flex-1 text-left">
+                          <h4 className="font-serif text-lg text-white font-semibold uppercase tracking-wide group-hover:text-gold transition-colors duration-300 leading-tight">
+                            {evt.title}
+                          </h4>
+                          <div className="space-y-1 font-sans text-[11px] text-gray-400 tracking-wide font-medium">
+                            <div className="flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-gold/70" />
+                              <span>{evt.time}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <MapPin className="w-3.5 h-3.5 text-gold/70" />
+                              <span className="line-clamp-1">{evt.location}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom CTA / Link */}
+                    <div className="px-5 pb-5 pt-3 flex items-center justify-between border-t border-white/5 mt-auto">
+                      <a
+                        href="/events"
+                        className="text-[10px] uppercase tracking-widest text-gold font-sans font-bold group-hover:text-white transition-colors"
+                      >
+                        View Event Details
+                      </a>
+                      <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-gold/50 group-hover:bg-gradient-gold group-hover:text-navy transition-all duration-300">
+                        <ArrowRight className="w-4 h-4 text-white group-hover:text-navy transition-colors" />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="text-center mt-16">
+              <a
+                href="/events"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-gold text-navy font-semibold shadow-gold hover:scale-[1.02] active:scale-[0.98] transition-all font-sans"
+              >
+                View All Events <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function parseEventDate(dateStr: string) {
+  const normalized = dateStr.toLowerCase();
+  if (normalized.includes("sunday")) {
+    return { month: "SUN", day: "WK" };
+  }
+  if (normalized.includes("friday")) {
+    return { month: "FRI", day: "WK" };
+  }
+  if (normalized.includes("recurring")) {
+    return { month: "REC", day: "WK" };
+  }
+
+  const date = new Date(dateStr);
+  if (!isNaN(date.getTime())) {
+    const months = [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC",
+    ];
+    return {
+      month: months[date.getMonth()],
+      day: String(date.getDate()).padStart(2, "0"),
+    };
+  }
+
+  return { month: "EVT", day: "📅" };
 }

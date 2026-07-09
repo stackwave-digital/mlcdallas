@@ -50,7 +50,9 @@ export default function Footer() {
         {/* Navigation & Service Times */}
         <div className="grid grid-cols-2 gap-4 md:col-span-2">
           <div>
-            <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4 font-semibold">Quick Links</div>
+            <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4 font-semibold">
+              Quick Links
+            </div>
             <ul className="space-y-2.5 font-sans">
               <li>
                 <Link
@@ -100,7 +102,9 @@ export default function Footer() {
             <div className="text-xs tracking-[0.2em] uppercase text-gold mb-4">Service Times</div>
             <ul className="space-y-2 text-primary-foreground/80 text-sm">
               {settings.services.map((s) => (
-                <li key={s.day}>{s.name}: <span className="text-gold">{s.time}</span></li>
+                <li key={s.day}>
+                  {s.name}: <span className="text-gold">{s.time}</span>
+                </li>
               ))}
             </ul>
 

@@ -21,7 +21,6 @@ publish_mode: editorial_workflow
 # ─── Collections ────────────────────────────────────────────
 
 collections:
-
   # ══════════════════════════════════════════════════════════
   # EVENTS — Folder collection (one file per event)
   # ══════════════════════════════════════════════════════════
@@ -35,22 +34,61 @@ collections:
     format: "json"
     slug: "{{slug}}"
     summary: "{{title}} — {{date}} at {{time}}"
-    sortable_fields: ["title", "date", "category"]
+    sortable_fields: ["title", "date"]
     description: "Create, edit, and manage church events. These appear on the Events page."
     fields:
-      - { label: "Event Title", name: "title", widget: "string", hint: "e.g. 'Friday Night Power & Worship'" }
-      - label: "Category"
-        name: "category"
-        widget: "select"
-        options: ["Worship", "Community", "Youth", "Special"]
-        hint: "Choose the ministry category for this event"
-      - { label: "Display Date", name: "date", widget: "string", hint: "e.g. 'Every Friday' or 'July 17, 2026'" }
-      - { label: "Sort Date", name: "rawDate", widget: "string", hint: "Use 'Recurring' for weekly events, or ISO date like '2026-07-17' for one-time events" }
-      - { label: "Time", name: "time", widget: "string", hint: "e.g. '7:30 PM' or '6:30 PM - 9:30 PM'" }
+      - {
+          label: "Event Title",
+          name: "title",
+          widget: "string",
+          hint: "e.g. 'Friday Night Power & Worship'",
+        }
+      - {
+          label: "Event Image",
+          name: "image",
+          widget: "image",
+          required: false,
+          hint: "Upload an cover image for this event",
+        }
+      - {
+          label: "Display Date",
+          name: "date",
+          widget: "string",
+          hint: "e.g. 'Every Friday' or 'July 17, 2026'",
+        }
+      - {
+          label: "Sort Date",
+          name: "rawDate",
+          widget: "string",
+          hint: "Use 'Recurring' for weekly events, or ISO date like '2026-07-17' for one-time events",
+        }
+      - {
+          label: "Time",
+          name: "time",
+          widget: "string",
+          hint: "e.g. '7:30 PM' or '6:30 PM - 9:30 PM'",
+        }
       - { label: "Location", name: "location", widget: "string", hint: "e.g. 'Main Sanctuary'" }
-      - { label: "Speaker", name: "speaker", widget: "string", required: false, hint: "Leave blank if no specific speaker" }
-      - { label: "Description", name: "description", widget: "text", hint: "A compelling description of the event (1-3 sentences)" }
-      - { label: "Featured Event?", name: "isFeatured", widget: "boolean", default: false, hint: "Featured events appear prominently at the top of the Events page" }
+      - {
+          label: "Speaker",
+          name: "speaker",
+          widget: "string",
+          required: false,
+          hint: "Leave blank if no specific speaker",
+        }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "text",
+          hint: "A compelling description of the event (1-3 sentences)",
+        }
+      - {
+          label: "Featured Event?",
+          name: "isFeatured",
+          widget: "boolean",
+          default: false,
+          hint: "Featured events appear prominently at the top of the Events page",
+        }
 
   # ══════════════════════════════════════════════════════════
   # GALLERY — Folder collection (one file per photo)
@@ -67,15 +105,38 @@ collections:
     summary: "{{title}} ({{category}})"
     description: "Upload and manage photos for the church Gallery page."
     fields:
-      - { label: "Photo Title", name: "title", widget: "string", hint: "A descriptive title for this photo" }
-      - { label: "Photo", name: "src", widget: "image", hint: "Upload a high-quality image (JPG or PNG)" }
+      - {
+          label: "Photo Title",
+          name: "title",
+          widget: "string",
+          required: false,
+          hint: "A descriptive title for this photo (optional)",
+        }
+      - {
+          label: "Photo",
+          name: "src",
+          widget: "image",
+          hint: "Upload a high-quality image (JPG or PNG)",
+        }
       - label: "Category"
         name: "category"
         widget: "select"
         options: ["Worship", "Community", "Sanctuary"]
         hint: "Choose the gallery category"
-      - { label: "Date Taken", name: "date", widget: "string", hint: "e.g. 'June 2026'" }
-      - { label: "Description", name: "desc", widget: "text", hint: "Describe what's happening in this photo" }
+      - {
+          label: "Date Taken",
+          name: "date",
+          widget: "string",
+          required: false,
+          hint: "e.g. 'June 2026' (optional)",
+        }
+      - {
+          label: "Description",
+          name: "desc",
+          widget: "text",
+          required: false,
+          hint: "Describe what's happening in this photo (optional)",
+        }
 
   # ══════════════════════════════════════════════════════════
   # SERMONS — Folder collection (one file per sermon)
@@ -94,12 +155,32 @@ collections:
     description: "Add and manage sermon entries. Each sermon links to a YouTube video."
     fields:
       - { label: "Sermon Title", name: "title", widget: "string" }
-      - { label: "YouTube Video ID", name: "youtubeId", widget: "string", hint: "The ID from the YouTube URL. For 'https://youtube.com/watch?v=ABC123', enter 'ABC123'" }
+      - {
+          label: "YouTube Video ID",
+          name: "youtubeId",
+          widget: "string",
+          hint: "The ID from the YouTube URL. For 'https://youtube.com/watch?v=ABC123', enter 'ABC123'",
+        }
       - { label: "Preacher", name: "preacher", widget: "string", default: "Pastor Brian Amoateng" }
-      - { label: "Series", name: "series", widget: "string", hint: "e.g. 'Walk in Dominion', 'Prayer & Power'" }
+      - {
+          label: "Series",
+          name: "series",
+          widget: "string",
+          hint: "e.g. 'Walk in Dominion', 'Prayer & Power'",
+        }
       - { label: "Date", name: "date", widget: "string", hint: "e.g. 'June 28, 2026'" }
-      - { label: "Scripture Reference", name: "scripture", widget: "string", hint: "e.g. 'Luke 10:19, Ephesians 1:20-22'" }
-      - { label: "Cover Image", name: "cover", widget: "image", hint: "Thumbnail image for this sermon" }
+      - {
+          label: "Scripture Reference",
+          name: "scripture",
+          widget: "string",
+          hint: "e.g. 'Luke 10:19, Ephesians 1:20-22'",
+        }
+      - {
+          label: "Cover Image",
+          name: "cover",
+          widget: "image",
+          hint: "Thumbnail image for this sermon",
+        }
       - { label: "Duration", name: "duration", widget: "string", hint: "e.g. '42:15'" }
       - label: "Sermon Notes"
         name: "notes"
@@ -129,13 +210,28 @@ collections:
         label: "General Settings"
         file: "content/settings/general.json"
         fields:
-          - { label: "Phone (Display)", name: "phone_display", widget: "string", hint: "e.g. '(817) 677-1407'" }
-          - { label: "Phone (Link)", name: "phone_href", widget: "string", hint: "e.g. 'tel:+18176771407'" }
+          - {
+              label: "Phone (Display)",
+              name: "phone_display",
+              widget: "string",
+              hint: "e.g. '(817) 677-1407'",
+            }
+          - {
+              label: "Phone (Link)",
+              name: "phone_href",
+              widget: "string",
+              hint: "e.g. 'tel:+18176771407'",
+            }
           - { label: "Street Address", name: "address_street", widget: "string" }
           - { label: "City", name: "address_city", widget: "string" }
           - { label: "State", name: "address_state", widget: "string" }
           - { label: "ZIP Code", name: "address_zip", widget: "string" }
-          - { label: "Full Address", name: "address_full", widget: "string", hint: "Complete address on one line" }
+          - {
+              label: "Full Address",
+              name: "address_full",
+              widget: "string",
+              hint: "Complete address on one line",
+            }
           - { label: "Instagram URL", name: "instagram_url", widget: "string" }
           - { label: "Instagram Handle", name: "instagram_handle", widget: "string" }
           - { label: "YouTube URL", name: "youtube_url", widget: "string" }
@@ -166,8 +262,18 @@ collections:
             widget: "object"
             collapsed: false
             fields:
-              - { label: "Location Badge", name: "location_badge", widget: "string", hint: "e.g. 'Dallas, TX'" }
-              - { label: "Schedule Badge", name: "schedule_badge", widget: "string", hint: "e.g. 'Fridays 7:30 PM • Sundays 10:00 AM'" }
+              - {
+                  label: "Location Badge",
+                  name: "location_badge",
+                  widget: "string",
+                  hint: "e.g. 'Dallas, TX'",
+                }
+              - {
+                  label: "Schedule Badge",
+                  name: "schedule_badge",
+                  widget: "string",
+                  hint: "e.g. 'Fridays 7:30 PM • Sundays 10:00 AM'",
+                }
               - { label: "Title Line 1", name: "title_line1", widget: "string" }
               - { label: "Title Highlight", name: "title_highlight", widget: "string" }
               - { label: "Title Subtitle", name: "title_subtitle", widget: "string" }
@@ -197,7 +303,11 @@ collections:
               - { label: "Featured Quote", name: "quote", widget: "text" }
               - { label: "Bio Introduction", name: "bio_intro", widget: "text" }
               - { label: "Global Influence", name: "global_influence", widget: "text" }
-              - { label: "Global Influence (continued)", name: "global_influence_2", widget: "text" }
+              - {
+                  label: "Global Influence (continued)",
+                  name: "global_influence_2",
+                  widget: "text",
+                }
               - { label: "Prophetic Grace", name: "prophetic_grace", widget: "text" }
               - { label: "Education", name: "education", widget: "text" }
               - { label: "Pastor Photo", name: "image", widget: "image" }

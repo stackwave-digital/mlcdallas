@@ -39,6 +39,7 @@ collections:
     description: "Create, edit, and manage church events. These appear on the Events page."
     fields:
       - { label: "Event Title", name: "title", widget: "string", hint: "e.g. 'Friday Night Power & Worship'" }
+      - { label: "Event Image", name: "image", widget: "image", required: false, hint: "Upload an cover image for this event" }
       - label: "Category"
         name: "category"
         widget: "select"
@@ -67,15 +68,15 @@ collections:
     summary: "{{title}} ({{category}})"
     description: "Upload and manage photos for the church Gallery page."
     fields:
-      - { label: "Photo Title", name: "title", widget: "string", hint: "A descriptive title for this photo" }
+      - { label: "Photo Title", name: "title", widget: "string", required: false, hint: "A descriptive title for this photo (optional)" }
       - { label: "Photo", name: "src", widget: "image", hint: "Upload a high-quality image (JPG or PNG)" }
       - label: "Category"
         name: "category"
         widget: "select"
         options: ["Worship", "Community", "Sanctuary"]
         hint: "Choose the gallery category"
-      - { label: "Date Taken", name: "date", widget: "string", hint: "e.g. 'June 2026'" }
-      - { label: "Description", name: "desc", widget: "text", hint: "Describe what's happening in this photo" }
+      - { label: "Date Taken", name: "date", widget: "string", required: false, hint: "e.g. 'June 2026' (optional)" }
+      - { label: "Description", name: "desc", widget: "text", required: false, hint: "Describe what's happening in this photo (optional)" }
 
   # ══════════════════════════════════════════════════════════
   # SERMONS — Folder collection (one file per sermon)

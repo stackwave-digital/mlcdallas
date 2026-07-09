@@ -11,6 +11,7 @@
 export interface ChurchEvent {
   id: string;
   title: string;
+  image?: string;
   category: "Worship" | "Community" | "Youth" | "Special";
   date: string;
   rawDate: string;

@@ -27,6 +27,7 @@ import {
   getSiteSettings,
   getHomepageContent,
   getMapsUrls,
+  getEvents,
 } from "@/lib/content";
 
 /* ── Load CMS Content ──────────────────────────────────────── */
@@ -74,6 +75,7 @@ function Index() {
         <Pastor />
         <WhatToExpect />
         <MissionVision />
+        <HomeEvents />
         <Services />
         <Location />
         <Contact />
@@ -1020,4 +1022,181 @@ function StickyMobileCTA() {
       </a>
     </div>
   );
+}
+
+function HomeEvents() {
+  const events = getEvents();
+  // Find first featured event, or use the first event as featured fallback
+  const featuredEvent = events.find((e) => e.isFeatured) || events[0];
+  // Filter out the featured event from the upcoming list so it's not duplicated
+  const upcomingEvents = events.filter((e) => e.id !== featuredEvent?.id);
+
+  return (
+    <section className="py-24 md:py-32 bg-[#090D16] text-white relative overflow-hidden">
+      {/* Editorial Grid lines for aesthetics */}
+      <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto" aria-hidden="true">
+        <div className="w-[1px] bg-white h-full"></div>
+        <div className="w-[1px] bg-white h-full hidden sm:block"></div>
+        <div className="w-[1px] bg-white h-full hidden md:block"></div>
+        <div className="w-[1px] bg-white h-full"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Featured Event Section */}
+        {featuredEvent && (
+          <div className="mb-24">
+            <div className="text-center mb-12">
+              <h2 className="text-xs uppercase tracking-[0.25em] text-gold font-bold mb-3">FEATURED EVENT</h2>
+              <p className="text-sm text-gray-400 font-sans animate-fade-in">The moment you don't want to miss.</p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="rounded-3xl bg-white/[0.03] border border-white/10 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 backdrop-blur-md hover:border-gold/30 transition-all duration-500 hover:shadow-elegant">
+                {featuredEvent.image && (
+                  <div className="w-full md:w-[380px] aspect-[16/10] rounded-2xl overflow-hidden shrink-0 border border-white/5">
+                    <img src={featuredEvent.image} alt={featuredEvent.title} className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <div className="flex-1 text-left space-y-4">
+                  <span className="inline-block bg-gold/10 text-gold border border-gold/30 text-[9px] uppercase tracking-widest px-2.5 py-1 rounded-md font-sans font-bold">
+                    {featuredEvent.category}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-serif text-white font-semibold uppercase tracking-wide leading-tight">
+                    {featuredEvent.title}
+                  </h3>
+                  <div className="flex flex-col gap-2 text-xs text-gold font-sans font-medium uppercase tracking-wider">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-gold/80" />
+                      <span>{featuredEvent.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-gold/80" />
+                      <span>{featuredEvent.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <MapPin className="w-4 h-4 text-gold/80" />
+                      <span>{featuredEvent.location}</span>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 text-sm font-sans font-light leading-relaxed">
+                    {featuredEvent.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Upcoming Events Section */}
+        {upcomingEvents.length > 0 && (
+          <div>
+            <div className="relative mb-16 text-center">
+              {/* Huge background text behind title */}
+              <span className="absolute inset-0 flex items-center justify-center text-7xl md:text-9xl font-black text-white/[0.02] select-none tracking-[0.2em] uppercase pointer-events-none">
+                ATTEND
+              </span>
+              <h3 className="relative z-10 text-3xl md:text-5xl font-serif text-white leading-tight">
+                UPCOMING <span className="text-gold italic">EVENTS</span>
+              </h3>
+              <p className="relative z-10 text-xs text-gray-400 uppercase tracking-widest mt-3">
+                Browse by category to discover what fits your season.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {upcomingEvents.map((evt) => {
+                const { month, day } = parseEventDate(evt.date);
+                return (
+                  <div key={evt.id} className="group bg-white/[0.02] border border-white/5 p-2 rounded-3xl overflow-hidden hover:border-gold/20 hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-1 shadow-elegant flex flex-col justify-between">
+                    <div>
+                      {evt.image ? (
+                        <div className="aspect-[16/9] w-full rounded-2xl overflow-hidden relative">
+                          <img src={evt.image} alt={evt.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        </div>
+                      ) : (
+                        <div className="aspect-[16/9] w-full rounded-2xl bg-navy-deep/40 flex items-center justify-center">
+                          <Calendar className="w-10 h-10 text-gold/30" />
+                        </div>
+                      )}
+                      
+                      {/* Card details block */}
+                      <div className="p-5 flex gap-4 items-start">
+                        {/* Left Side: Date Box */}
+                        <div className="flex flex-col items-center justify-center border border-white/10 rounded-xl px-3 py-2 shrink-0 bg-white/[0.02] min-w-[56px]">
+                          <span className="text-[10px] text-gray-400 font-sans tracking-wider uppercase font-semibold">{month}</span>
+                          <span className="text-2xl text-white font-sans font-bold tracking-tight mt-0.5">{day}</span>
+                        </div>
+
+                        {/* Right Side: Title, Time, Location */}
+                        <div className="space-y-3 flex-1 text-left">
+                          <h4 className="font-serif text-lg text-white font-semibold uppercase tracking-wide group-hover:text-gold transition-colors duration-300 leading-tight">
+                            {evt.title}
+                          </h4>
+                          <div className="space-y-1 font-sans text-[11px] text-gray-400 tracking-wide font-medium">
+                            <div className="flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-gold/70" />
+                              <span>{evt.time}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <MapPin className="w-3.5 h-3.5 text-gold/70" />
+                              <span className="line-clamp-1">{evt.location}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Bottom CTA / Link */}
+                    <div className="px-5 pb-5 pt-3 flex items-center justify-between border-t border-white/5 mt-auto">
+                      <a href="/events" className="text-[10px] uppercase tracking-widest text-gold font-sans font-bold group-hover:text-white transition-colors">
+                        View Event Details
+                      </a>
+                      <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-gold/50 group-hover:bg-gradient-gold group-hover:text-navy transition-all duration-300">
+                        <ArrowRight className="w-4 h-4 text-white group-hover:text-navy transition-colors" />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="text-center mt-16">
+              <a
+                href="/events"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-gold text-navy font-semibold shadow-gold hover:scale-[1.02] active:scale-[0.98] transition-all font-sans"
+              >
+                View All Events <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        )}
+
+      </div>
+    </section>
+  );
+}
+
+function parseEventDate(dateStr: string) {
+  const normalized = dateStr.toLowerCase();
+  if (normalized.includes("sunday")) {
+    return { month: "SUN", day: "WK" };
+  }
+  if (normalized.includes("friday")) {
+    return { month: "FRI", day: "WK" };
+  }
+  if (normalized.includes("recurring")) {
+    return { month: "REC", day: "WK" };
+  }
+
+  const date = new Date(dateStr);
+  if (!isNaN(date.getTime())) {
+    const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    return {
+      month: months[date.getMonth()],
+      day: String(date.getDate()).padStart(2, "0"),
+    };
+  }
+
+  return { month: "EVT", day: "📅" };
 }

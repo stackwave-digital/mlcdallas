@@ -12,7 +12,6 @@ export interface ChurchEvent {
   id: string;
   title: string;
   image?: string;
-  category: "Worship" | "Community" | "Youth" | "Special";
   date: string;
   rawDate: string;
   time: string;
@@ -123,27 +122,27 @@ export interface HomepageContent {
 
 const eventModules = import.meta.glob<{ default: Record<string, unknown> }>(
   "/content/events/*.json",
-  { eager: true }
+  { eager: true },
 );
 
 const galleryModules = import.meta.glob<{ default: Record<string, unknown> }>(
   "/content/gallery/*.json",
-  { eager: true }
+  { eager: true },
 );
 
 const sermonModules = import.meta.glob<{ default: Record<string, unknown> }>(
   "/content/sermons/*.json",
-  { eager: true }
+  { eager: true },
 );
 
 const settingsModules = import.meta.glob<{ default: SiteSettings }>(
   "/content/settings/general.json",
-  { eager: true }
+  { eager: true },
 );
 
 const homepageModules = import.meta.glob<{ default: HomepageContent }>(
   "/content/pages/homepage.json",
-  { eager: true }
+  { eager: true },
 );
 
 /* ── Helper: extract ID from file path ─────────────────────── */

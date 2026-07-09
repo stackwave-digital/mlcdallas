@@ -64,7 +64,7 @@ const churchSchema = {
     geoMidpoint: {
       "@type": "GeoCoordinates",
       latitude: 32.7767,
-      longitude: -96.7970,
+      longitude: -96.797,
     },
     geoRadius: "50000",
   },
@@ -102,7 +102,7 @@ const organizationSchema = {
       geoMidpoint: {
         "@type": "GeoCoordinates",
         latitude: 32.7767,
-        longitude: -96.7970,
+        longitude: -96.797,
       },
       geoRadius: "50000",
     },

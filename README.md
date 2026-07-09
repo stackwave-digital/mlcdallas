@@ -20,21 +20,22 @@ MercyLife Church Dominion Temple is a vibrant, faith-centered community offering
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | [TanStack Start](https://tanstack.com/start) (React 19 + SSR) |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
-| Build Tool | [Vite 7](https://vite.dev/) |
-| Fonts | Google Fonts (Cormorant Garamond + Inter) |
-| Icons | [Lucide React](https://lucide.dev/) |
+| Layer         | Technology                                                                  |
+| ------------- | --------------------------------------------------------------------------- |
+| Framework     | [TanStack Start](https://tanstack.com/start) (React 19 + SSR)               |
+| Styling       | [Tailwind CSS v4](https://tailwindcss.com/)                                 |
+| Build Tool    | [Vite 7](https://vite.dev/)                                                 |
+| Fonts         | Google Fonts (Cormorant Garamond + Inter)                                   |
+| Icons         | [Lucide React](https://lucide.dev/)                                         |
 | UI Components | [Radix UI](https://www.radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/) |
-| Server | Nitro (Cloudflare-ready) |
+| Server        | Nitro (Cloudflare-ready)                                                    |
 
 ---
 
 ## Features
 
 ### SEO & Local Search
+
 - Optimized `<title>`, meta description, canonical URL, and robots directives
 - Open Graph and Twitter/X card metadata for rich social sharing
 - Complete JSON-LD structured data: `Church`, `Organization`, `WebSite`, `BreadcrumbList`
@@ -42,6 +43,7 @@ MercyLife Church Dominion Temple is a vibrant, faith-centered community offering
 - Local keyword optimization for Arlington, TX church searches
 
 ### Accessibility
+
 - Semantic HTML (`<main>`, `<nav>`, `<header>`, `<footer>`, `<section>`, `<address>`)
 - Skip-to-content link for keyboard navigation
 - ARIA labels on all interactive elements and sections
@@ -50,6 +52,7 @@ MercyLife Church Dominion Temple is a vibrant, faith-centered community offering
 - High contrast brand palette
 
 ### Performance
+
 - Server-side rendered (SSR) for fast initial paint
 - `fetchPriority="high"` on hero image (LCP optimization)
 - `content-visibility: auto` on below-fold sections
@@ -58,6 +61,7 @@ MercyLife Church Dominion Temple is a vibrant, faith-centered community offering
 - Google Fonts loaded with `display=swap`
 
 ### Conversion
+
 - Prominent "Plan Your Visit" CTAs throughout the page
 - Sticky mobile bottom bar with "Plan Your Visit" + "Call Now" buttons
 - "What to Expect" section addressing first-time visitor concerns
@@ -119,15 +123,15 @@ The dev server starts at `http://localhost:8080` (or next available port).
 
 The site is structured to expand into a full multi-page website:
 
-| Page | URL | Status |
-|------|-----|--------|
-| Home | `/` | ✅ Live |
-| About | `/about` | 🔜 Planned |
+| Page       | URL           | Status     |
+| ---------- | ------------- | ---------- |
+| Home       | `/`           | ✅ Live    |
+| About      | `/about`      | 🔜 Planned |
 | Ministries | `/ministries` | 🔜 Planned |
-| Events | `/events` | 🔜 Planned |
-| Sermons | `/sermons` | 🔜 Planned |
-| Giving | `/giving` | 🔜 Planned |
-| Contact | `/contact` | 🔜 Planned |
+| Events     | `/events`     | 🔜 Planned |
+| Sermons    | `/sermons`    | 🔜 Planned |
+| Giving     | `/giving`     | 🔜 Planned |
+| Contact    | `/contact`    | 🔜 Planned |
 
 ---
 

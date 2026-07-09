@@ -48,7 +48,7 @@ function Gallery() {
 
   // Filter images based on selected tab
   const filteredImages = GALLERY_IMAGES.filter(
-    (img) => activeCategory === "All" || img.category === activeCategory
+    (img) => activeCategory === "All" || img.category === activeCategory,
   );
 
   const openLightbox = (index: number) => {
@@ -71,7 +71,7 @@ function Gallery() {
       }
       setLightboxIndex(nextIndex);
     },
-    [lightboxIndex, filteredImages.length]
+    [lightboxIndex, filteredImages.length],
   );
 
   // Handle keyboard navigation for lightbox
@@ -105,7 +105,10 @@ function Gallery() {
             }}
             aria-hidden="true"
           />
-          <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto" aria-hidden="true">
+          <div
+            className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto"
+            aria-hidden="true"
+          >
             <div className="w-[1px] bg-white h-full"></div>
             <div className="w-[1px] bg-white h-full"></div>
             <div className="w-[1px] bg-white h-full"></div>
@@ -113,7 +116,9 @@ function Gallery() {
           <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-6 animate-fade-up">
             <div className="flex items-center justify-center gap-3 mb-2">
               <span className="w-8 h-[1px] bg-gold" />
-              <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Moments</span>
+              <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
+                Moments
+              </span>
               <span className="w-8 h-[1px] bg-gold" />
             </div>
             <h1 className="text-5xl sm:text-7xl font-serif mb-6 leading-tight">
@@ -131,7 +136,9 @@ function Gallery() {
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl text-navy font-serif">Featured Moments</h2>
-              <p className="text-xs text-muted-foreground mt-2 uppercase tracking-wider">Highlighted snapshots of our church life</p>
+              <p className="text-xs text-muted-foreground mt-2 uppercase tracking-wider">
+                Highlighted snapshots of our church life
+              </p>
             </div>
 
             <div className="relative px-1 sm:px-10">
@@ -230,8 +237,12 @@ function Gallery() {
                         <span className="inline-block bg-gold text-navy font-bold text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-full">
                           {img.category}
                         </span>
-                        <h4 className="font-serif text-xl text-primary-foreground leading-tight">{img.title}</h4>
-                        <p className="text-primary-foreground/75 text-xs line-clamp-2 leading-relaxed font-light">{img.desc}</p>
+                        <h4 className="font-serif text-xl text-primary-foreground leading-tight">
+                          {img.title}
+                        </h4>
+                        <p className="text-primary-foreground/75 text-xs line-clamp-2 leading-relaxed font-light">
+                          {img.desc}
+                        </p>
                         <div className="flex items-center gap-1.5 text-gold text-xs font-semibold pt-1 uppercase tracking-wider">
                           <ZoomIn className="w-3.5 h-3.5" /> Enlarge Photo
                         </div>

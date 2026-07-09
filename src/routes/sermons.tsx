@@ -80,7 +80,10 @@ function Sermons() {
             }}
             aria-hidden="true"
           />
-          <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto" aria-hidden="true">
+          <div
+            className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto"
+            aria-hidden="true"
+          >
             <div className="w-[1px] bg-white h-full"></div>
             <div className="w-[1px] bg-white h-full"></div>
             <div className="w-[1px] bg-white h-full"></div>
@@ -88,7 +91,9 @@ function Sermons() {
           <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-6 animate-fade-up">
             <div className="flex items-center justify-center gap-3 mb-2">
               <span className="w-8 h-[1px] bg-gold" />
-              <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">Teachings</span>
+              <span className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
+                Teachings
+              </span>
               <span className="w-8 h-[1px] bg-gold" />
             </div>
             <h1 className="text-5xl sm:text-7xl font-serif mb-6 leading-tight">
@@ -162,9 +167,7 @@ function Sermons() {
                   <div className="flex items-center gap-2 text-sm text-muted-foreground font-sans font-medium">
                     <User className="w-4 h-4 text-gold" />
                     <span>Preacher: </span>
-                    <span className="font-semibold text-foreground">
-                      {featuredSermon.preacher}
-                    </span>
+                    <span className="font-semibold text-foreground">{featuredSermon.preacher}</span>
                   </div>
                 </div>
 
@@ -220,10 +223,12 @@ function Sermons() {
                 </a>
                 <button
                   onClick={() => {
-                    navigator.share?.({
-                      title: featuredSermon.title,
-                      url: window.location.href,
-                    }).catch(() => {});
+                    navigator
+                      .share?.({
+                        title: featuredSermon.title,
+                        url: window.location.href,
+                      })
+                      .catch(() => {});
                   }}
                   className="p-2 text-muted-foreground hover:text-navy hover:bg-navy/5 rounded-full transition-all cursor-pointer"
                   aria-label="Share this sermon"
@@ -346,7 +351,10 @@ function Sermons() {
 
       {/* Lightbox / Sermon Player Modal Dialog */}
       {activeSermon && (
-        <Dialog open={activeSermon !== null} onOpenChange={(open) => !open && setActiveSermon(null)}>
+        <Dialog
+          open={activeSermon !== null}
+          onOpenChange={(open) => !open && setActiveSermon(null)}
+        >
           <DialogContent className="max-w-4xl bg-navy/90 backdrop-blur-md border border-white/10 p-2 sm:p-6 overflow-y-auto max-h-[92vh] flex flex-col justify-start items-center shadow-2xl rounded-2xl w-[95vw]">
             <div className="w-full flex flex-col justify-start gap-4">
               <DialogTitle className="sr-only">{activeSermon.title}</DialogTitle>

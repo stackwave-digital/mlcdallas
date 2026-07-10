@@ -1,11 +1,11 @@
 {
-  "title": "Sunday Dominion Service",
-  "image": "/uploads/sunctuary.jpg",
-  "date": "Every Sunday",
-  "rawDate": "Recurring",
   "time": "10:00 AM",
+  "date": "Every Sunday",
   "location": "Main Sanctuary",
-  "speaker": "Pastor Brian Amoateng",
+  "rawDate": "Recurring",
+  "title": "Sunday Dominion Service",
+  "isFeatured": true,
+  "image": "/uploads/whatsapp-image-2026-07-05-at-12.10.38-pm-3-.jpeg",
   "description": "Start your week in victory! Experience a vibrant celebration featuring uplifting praise, special choir performances, and dynamic teachings designed to equip you for dominion.",
-  "isFeatured": true
+  "speaker": "Pastor Brian Amoateng"
 }

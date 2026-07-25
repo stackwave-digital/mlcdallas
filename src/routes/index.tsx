@@ -18,7 +18,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import logoImg from "@/assets/logo.png";
-// @ts-ignore
+// @ts-expect-error: No type declarations for mp4 video files
 import introVideo from "@/assets/videos/intro-video.mp4";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -106,103 +106,108 @@ function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] flex items-center overflow-hidden bg-navy-deep"
+      className="relative pt-24 pb-12 md:pt-32 md:pb-10 bg-background overflow-hidden"
       aria-label="Welcome hero"
     >
-      {/* Background Video */}
-      <video
-        id="hero-bg-video"
-        src={introVideo}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-60"
-        style={{ zIndex: 1 }}
+      {/* Full-width Abstract Background Shape */}
+      <div
+        className="absolute top-50 left-0 w-full h-[30vh] md:h-[40vh] bg-navy origin-top-left skew-y-3 md:skew-y-6 pointer-events-none"
+        style={{ zIndex: 0 }}
+        aria-hidden="true"
+      />
+      {/* Decorative Accent Glow */}
+      <div
+        className="absolute top-[20%] right-[-10%] w-[40%] h-[50%] bg-gold/15 blur-[100px] pointer-events-none"
+        style={{ zIndex: 0 }}
+        aria-hidden="true"
       />
 
-      {/* Glassmorphic Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-hero" style={{ zIndex: 2 }} aria-hidden="true" />
-      {/* Editorial Grid overlay lines (Modernist) */}
-      <div
-        className="absolute inset-0 flex justify-between pointer-events-none opacity-10 px-6 max-w-7xl mx-auto"
-        style={{ zIndex: 3 }}
-        aria-hidden="true"
-      >
-        <div className="w-[1px] bg-white h-full"></div>
-        <div className="w-[1px] bg-white h-full hidden sm:block"></div>
-        <div className="w-[1px] bg-white h-full hidden md:block"></div>
-        <div className="w-[1px] bg-white h-full"></div>
-      </div>
+      <div className="w-full mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+        {/* Video Container */}
+        <div className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-[50vh] md:h-[70vh] bg-navy-deep">
+          <video
+            id="hero-bg-video"
+            src={introVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ zIndex: 1 }}
+          />
+          {/* Pause/Play controller for the video */}
+          <button
+            onClick={togglePlay}
+            className="absolute bottom-6 right-6 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white border border-white/20 flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-md"
+            aria-label={isPlaying ? "Pause video" : "Play video"}
+          >
+            {isPlaying ? (
+              <span className="block w-2.5 h-2.5 border-l-2 border-r-2 border-white" />
+            ) : (
+              <Play className="w-4 h-4 fill-white ml-0.5" />
+            )}
+          </button>
+        </div>
 
-      <div className="relative max-w-5xl mx-auto px-6 py-32 text-center" style={{ zIndex: 4 }}>
-        <div className="animate-fade-up">
-          <div className="inline-flex items-stretch mb-8 glass-panel border border-white/20 rounded-full overflow-hidden p-1">
-            <div className="bg-gradient-gold text-navy px-4 py-1.5 rounded-full font-sans text-[10px] tracking-[0.25em] uppercase font-bold flex items-center shadow-sm">
-              {hero.location_badge}
+        {/* Text Card Underneath overlapping the video */}
+        <div className="relative -mt-16 md:-mt-24 max-w-5xl mx-auto px-2 md:px-4 z-30">
+          <div className="glass-panel bg-background/85 backdrop-blur-xl border border-border/50 rounded-2xl md:rounded-3xl p-8 md:p-12 shadow-material-3 text-center animate-fade-up">
+            <div className="inline-flex items-stretch mb-6 glass-panel border border-border/50 rounded-full overflow-hidden p-1 shadow-sm bg-background/50">
+              <div className="bg-gradient-gold text-navy px-4 py-1.5 rounded-full font-sans text-[10px] tracking-[0.25em] uppercase font-bold flex items-center shadow-sm">
+                {hero.location_badge}
+              </div>
+              <div className="px-5 py-1.5 text-[10px] tracking-[0.25em] uppercase flex items-center font-semibold text-foreground">
+                {hero.schedule_badge}
+              </div>
             </div>
-            <div className="px-5 py-1.5 text-[10px] tracking-[0.25em] uppercase flex items-center font-semibold">
-              {hero.schedule_badge}
+
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.1] tracking-tight">
+              {hero.title_line1}{" "}
+              <span className="text-gold italic block sm:inline">{hero.title_highlight}</span>
+              <span className="block text-lg sm:text-xl md:text-2xl mt-4 font-sans tracking-[0.2em] uppercase font-medium text-gold/90">
+                {hero.title_subtitle}
+              </span>
+            </h1>
+
+            <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed font-sans font-light">
+              {hero.description}
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a
+                href="#visit"
+                id="hero-plan-visit"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-gold text-navy font-semibold shadow-gold hover:scale-[1.02] active:scale-[0.98] transition-all font-sans"
+              >
+                {hero.cta_primary} <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </a>
+              <a
+                href={YOUTUBE_URL}
+                id="hero-watch-online"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-secondary hover:bg-secondary/80 text-secondary-foreground border border-border/50 backdrop-blur-md active:scale-[0.98] transition-all font-sans"
+              >
+                <Play className="w-4 h-4 text-gold fill-gold" aria-hidden="true" />{" "}
+                {hero.cta_secondary}
+              </a>
             </div>
-          </div>
-
-          <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl text-primary-foreground leading-[1.05] tracking-tight">
-            {hero.title_line1}{" "}
-            <span className="text-gold italic block sm:inline">{hero.title_highlight}</span>
-            <span className="block text-xl sm:text-2xl md:text-3xl mt-4 font-sans tracking-[0.2em] uppercase font-medium text-gold/80">
-              {hero.title_subtitle}
-            </span>
-          </h1>
-
-          <p className="mt-8 text-lg md:text-xl text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed font-sans font-light">
-            {hero.description}
-          </p>
-
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="#visit"
-              id="hero-plan-visit"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-gold text-navy font-semibold shadow-gold hover:scale-[1.02] active:scale-[0.98] transition-all font-sans"
-              aria-label="Plan your visit to MercyLife Church"
-            >
-              {hero.cta_primary} <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </a>
-            <a
-              href={YOUTUBE_URL}
-              id="hero-watch-online"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md active:scale-[0.98] transition-all font-sans"
-              aria-label="Watch MercyLife Church sermons on YouTube"
-            >
-              <Play className="w-4 h-4 text-gold fill-gold" aria-hidden="true" />{" "}
-              {hero.cta_secondary}
-            </a>
           </div>
         </div>
       </div>
-
-      {/* Pause/Play controller for the video */}
-      <button
-        onClick={togglePlay}
-        className="absolute bottom-8 right-8 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/25 flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer"
-        aria-label={isPlaying ? "Pause background video" : "Play background video"}
-        style={{ zIndex: 10 }}
-      >
-        {isPlaying ? (
-          <span className="block w-2.5 h-2.5 border-l-2 border-r-2 border-current" />
-        ) : (
-          <Play className="w-4 h-4 fill-current ml-0.5" />
-        )}
-      </button>
-
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-foreground/50 flex flex-col items-center gap-2"
-        style={{ zIndex: 10 }}
-        aria-hidden="true"
-      >
-        <span className="text-xs tracking-widest uppercase font-sans">Scroll</span>
-        <ChevronDown className="w-4 h-4 animate-bounce" />
+      {/* marquee */}
+      <div className="w-full mt-10 overflow-hidden border-y border-black/5 bg-white/60 backdrop-blur-md py-5 z-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500 fill-mode-both shadow-sm">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(12)].map((_, i) => (
+            <span
+              key={i}
+              className="flex items-center text-black/70 hover:text-black transition-colors text-xl md:text-2xl lg:text-3xl font-black tracking-[0.2em] uppercase cursor-default px-8"
+            >
+              MERCYLIFE CHURCH
+              <span className="text-teal-600/50 mx-8 flex items-center">✝</span>A PLACE OF HOPE
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -213,14 +218,18 @@ function Welcome() {
 
   return (
     <section
-      className="py-24 md:py-32 bg-background relative overflow-hidden section-lazy"
+      className="py-24 md:py-32 bg-navy text-primary-foreground relative overflow-hidden section-lazy border-t border-white/10"
       aria-label="About MercyLife Church"
     >
-      {/* Decorative Editorial Elements */}
-      <div className="absolute right-0 top-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute left-0 bottom-1/4 w-72 h-72 bg-navy/5 rounded-full blur-3xl pointer-events-none" />
+      <div
+        className="absolute inset-0 opacity-[0.15] mix-blend-screen pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle at 50% 50%, var(--gold) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
 
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-16 items-center relative">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-16 items-center relative z-10">
         <div className="md:col-span-7">
           <div className="flex items-center gap-3 mb-6">
             <span className="w-8 h-[1px] bg-gold" />
@@ -228,22 +237,22 @@ function Welcome() {
               About Us
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl text-navy mb-8 font-serif leading-[1.15]">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8 font-serif leading-[1.15]">
             {about.heading} <span className="italic text-gold">{about.heading_highlight}</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-6 editorial-first-letter">
+          <p className="text-lg text-primary-foreground/80 leading-relaxed mb-6 editorial-first-letter">
             {about.paragraph1}
           </p>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8 font-light">
+          <p className="text-lg text-primary-foreground/80 leading-relaxed mb-8 font-light">
             {about.paragraph2}
           </p>
         </div>
         <div className="md:col-span-5 relative">
-          <div
-            className="absolute -inset-4 bg-gradient-gold rounded-2xl opacity-10 blur-2xl"
-            aria-hidden="true"
-          />
-          <div className="rounded-2xl overflow-hidden border border-gold/10 p-2 glass-panel shadow-material-2">
+          {/* Card with gold corner trims */}
+          <div className="glass-panel-dark border border-white/10 p-3 md:p-4 rounded-3xl shadow-material-3 relative overflow-hidden">
+            <div className="absolute right-0 top-0 w-24 h-24 border-t-2 border-r-2 border-gold/40 rounded-tr-3xl" />
+            <div className="absolute left-0 bottom-0 w-24 h-24 border-b-2 border-l-2 border-gold/40 rounded-bl-3xl" />
+
             <img
               src={about.image}
               alt="MercyLife Church Dominion Temple community members greeting visitors at a Sunday worship service in Dallas, Texas"
@@ -251,7 +260,7 @@ function Welcome() {
               decoding="async"
               width={1400}
               height={1600}
-              className="rounded-xl w-full h-[520px] object-cover"
+              className="rounded-2xl w-full h-[520px] object-cover relative z-10"
             />
           </div>
         </div>
@@ -633,14 +642,13 @@ function Services() {
   return (
     <section
       id="visit"
-      className="py-24 md:py-32 bg-navy text-primary-foreground relative overflow-hidden section-lazy"
+      className="py-24 md:py-32 bg-secondary/30 text-navy relative overflow-hidden section-lazy border-t border-border/40"
       aria-label="Worship service times"
     >
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, var(--gold) 0, transparent 40%), radial-gradient(circle at 80% 80%, var(--gold) 0, transparent 40%)",
+          backgroundImage: "radial-gradient(circle at 50% 50%, var(--gold) 0%, transparent 60%)",
         }}
         aria-hidden="true"
       />
@@ -653,10 +661,10 @@ function Services() {
             </span>
             <span className="w-8 h-[1px] bg-gold" />
           </div>
-          <h2 className="text-4xl md:text-5xl mb-6 font-serif">
+          <h2 className="text-4xl md:text-5xl mb-6 font-serif text-navy">
             Worship Services — <span className="italic text-gold">Friday &amp; Sunday</span>
           </h2>
-          <p className="text-primary-foreground/75 max-w-xl mx-auto text-lg font-light leading-relaxed">
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg font-light leading-relaxed">
             Join us for a worship service in Dallas, TX. Experience God's presence through anointed
             praise, prayer, and teaching that transforms lives.
           </p>
@@ -665,9 +673,11 @@ function Services() {
           {services.map((s) => (
             <div
               key={s.name}
-              className="group relative p-10 rounded-2xl glass-panel-dark border border-white/10 hover:border-gold/30 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+              className="group relative p-10 rounded-2xl bg-white border border-border/50 hover:border-gold/30 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between overflow-hidden shadow-material-1"
             >
-              <div>
+              <div className="absolute right-0 top-0 w-16 h-16 border-t-2 border-r-2 border-gold/40 rounded-tr-2xl pointer-events-none" />
+              <div className="absolute left-0 bottom-0 w-16 h-16 border-b-2 border-l-2 border-gold/40 rounded-bl-2xl pointer-events-none" />
+              <div className="relative z-10">
                 <div className="flex items-start justify-between mb-8">
                   <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center">
                     <Clock className="w-5 h-5 text-gold" strokeWidth={1.5} aria-hidden="true" />
@@ -676,12 +686,12 @@ function Services() {
                     {s.day}
                   </span>
                 </div>
-                <h3 className="font-serif text-3xl mb-3 leading-tight">{s.name}</h3>
+                <h3 className="font-serif text-3xl mb-3 leading-tight text-navy">{s.name}</h3>
                 <div className="font-serif text-5xl text-gold mb-6 font-semibold tracking-tight">
                   {s.time}
                 </div>
               </div>
-              <p className="text-primary-foreground/75 font-light text-sm leading-relaxed">
+              <p className="text-muted-foreground font-light text-sm leading-relaxed relative z-10">
                 {s.description}
               </p>
             </div>
@@ -702,7 +712,7 @@ function Services() {
             href={DIRECTIONS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-gold hover:text-white transition-colors font-sans text-sm tracking-wide"
+            className="inline-flex items-center gap-2 text-gold hover:text-navy transition-colors font-sans text-sm tracking-wide"
           >
             <Calendar className="w-4 h-4" aria-hidden="true" /> Add to your calendar — we'll save
             you a seat
@@ -796,9 +806,16 @@ function Location() {
 function Contact() {
   return (
     <section
-      className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden border-y border-border/40 section-lazy"
+      className="py-24 md:py-32 bg-navy text-primary-foreground relative overflow-hidden border-y border-white/10 section-lazy"
       aria-label="Contact MercyLife Church"
     >
+      <div
+        className="absolute inset-0 opacity-[0.15] mix-blend-screen pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle at 50% 50%, var(--gold) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
       <div className="max-w-3xl mx-auto px-6 text-center relative">
         <div className="flex items-center justify-center gap-3 mb-6">
           <span className="w-8 h-[1px] bg-gold" />
@@ -807,10 +824,10 @@ function Contact() {
           </span>
           <span className="w-8 h-[1px] bg-gold" />
         </div>
-        <h2 className="text-4xl md:text-5xl text-navy mb-6 font-serif">
+        <h2 className="text-4xl md:text-5xl text-white mb-6 font-serif">
           Connect With <span className="italic text-gold">MercyLife Church</span>
         </h2>
-        <p className="text-lg text-muted-foreground mb-12 leading-relaxed font-light">
+        <p className="text-lg text-primary-foreground/80 mb-12 leading-relaxed font-light">
           Planning your first visit to our Christian church in Dallas, Texas? We'd love to hear from
           you. Whether you have questions about our worship services, need prayer, or simply want to
           learn more, our team is here to help. Call us anytime.
@@ -819,13 +836,15 @@ function Contact() {
           <a
             href={PHONE_HREF}
             id="contact-call"
-            className="group flex-1 inline-flex items-center gap-5 p-8 rounded-2xl glass-panel-dark text-primary-foreground shadow-material-1 hover:shadow-material-2 hover:border-gold/30 transition-all border border-white/10"
+            className="group relative overflow-hidden flex-1 inline-flex items-center gap-5 p-8 rounded-2xl glass-panel-dark text-primary-foreground shadow-material-1 hover:shadow-material-2 hover:border-gold/30 transition-all border border-white/10"
             aria-label={`Call MercyLife Church at ${PHONE_DISPLAY}`}
           >
-            <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0">
+            <div className="absolute right-0 top-0 w-16 h-16 border-t-2 border-r-2 border-gold/40 rounded-tr-2xl pointer-events-none" />
+            <div className="absolute left-0 bottom-0 w-16 h-16 border-b-2 border-l-2 border-gold/40 rounded-bl-2xl pointer-events-none" />
+            <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 relative z-10">
               <Phone className="w-5 h-5 text-gold" strokeWidth={1.5} aria-hidden="true" />
             </div>
-            <div className="text-left">
+            <div className="text-left relative z-10">
               <div className="text-[10px] tracking-[0.2em] uppercase text-gold font-bold">
                 Call Us
               </div>
@@ -837,13 +856,15 @@ function Contact() {
             id="contact-directions"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex-1 inline-flex items-center gap-5 p-8 rounded-2xl glass-panel-dark text-primary-foreground shadow-material-1 hover:shadow-material-2 hover:border-gold/30 transition-all border border-white/10"
+            className="group relative overflow-hidden flex-1 inline-flex items-center gap-5 p-8 rounded-2xl glass-panel-dark text-primary-foreground shadow-material-1 hover:shadow-material-2 hover:border-gold/30 transition-all border border-white/10"
             aria-label="Get directions to MercyLife Church"
           >
-            <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0">
+            <div className="absolute right-0 top-0 w-16 h-16 border-t-2 border-r-2 border-gold/40 rounded-tr-2xl pointer-events-none" />
+            <div className="absolute left-0 bottom-0 w-16 h-16 border-b-2 border-l-2 border-gold/40 rounded-bl-2xl pointer-events-none" />
+            <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center shrink-0 relative z-10">
               <Navigation className="w-5 h-5 text-gold" strokeWidth={1.5} aria-hidden="true" />
             </div>
-            <div className="text-left">
+            <div className="text-left relative z-10">
               <div className="text-[10px] tracking-[0.2em] uppercase text-gold font-bold">
                 Visit Us
               </div>
@@ -945,7 +966,7 @@ function Connect() {
 function ComingSoon() {
   return (
     <section
-      className="py-28 md:py-36 bg-navy text-primary-foreground relative overflow-hidden section-lazy border-t border-white/10"
+      className="hidden py-28 md:py-36 bg-navy text-primary-foreground relative overflow-hidden section-lazy border-t border-white/10"
       aria-label="Future website features"
     >
       <div
@@ -1040,7 +1061,14 @@ function HomeEvents() {
   const upcomingEvents = events.filter((e) => e.id !== featuredEvent?.id);
 
   return (
-    <section className="py-24 md:py-32 bg-[#090D16] text-white relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-navy text-primary-foreground relative overflow-hidden border-t border-white/10">
+      <div
+        className="absolute inset-0 opacity-[0.15] mix-blend-screen pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle at 50% 50%, var(--gold) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
       {/* Editorial Grid lines for aesthetics */}
       <div
         className="absolute inset-0 flex justify-between pointer-events-none opacity-5 px-6 max-w-7xl mx-auto"
@@ -1066,7 +1094,9 @@ function HomeEvents() {
             </div>
 
             <div className="max-w-5xl mx-auto">
-              <div className="rounded-3xl bg-white/[0.03] border border-white/10 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 backdrop-blur-md hover:border-gold/30 transition-all duration-500 hover:shadow-elegant">
+              <div className="relative rounded-3xl bg-white/[0.03] border border-white/10 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8 backdrop-blur-md hover:border-gold/30 transition-all duration-500 hover:shadow-elegant overflow-hidden">
+                <div className="absolute right-0 top-0 w-24 h-24 border-t-2 border-r-2 border-gold/40 rounded-tr-3xl pointer-events-none" />
+                <div className="absolute left-0 bottom-0 w-24 h-24 border-b-2 border-l-2 border-gold/40 rounded-bl-3xl pointer-events-none" />
                 {featuredEvent.image && (
                   <div className="w-full md:w-[380px] aspect-[16/10] rounded-2xl overflow-hidden shrink-0 border border-white/5">
                     <img
@@ -1121,9 +1151,11 @@ function HomeEvents() {
                 return (
                   <div
                     key={evt.id}
-                    className="group bg-white/[0.02] border border-white/5 p-2 rounded-3xl overflow-hidden hover:border-gold/20 hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-1 shadow-elegant flex flex-col justify-between"
+                    className="relative group bg-white/[0.02] border border-white/5 p-2 rounded-3xl overflow-hidden hover:border-gold/20 hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-1 shadow-elegant flex flex-col justify-between"
                   >
-                    <div>
+                    <div className="absolute right-0 top-0 w-16 h-16 border-t-2 border-r-2 border-gold/40 rounded-tr-3xl z-10 pointer-events-none" />
+                    <div className="absolute left-0 bottom-0 w-16 h-16 border-b-2 border-l-2 border-gold/40 rounded-bl-3xl z-10 pointer-events-none" />
+                    <div className="relative z-0">
                       {evt.image ? (
                         <div className="aspect-[16/9] w-full rounded-2xl overflow-hidden relative">
                           <img

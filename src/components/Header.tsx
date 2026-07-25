@@ -31,10 +31,8 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "glass-panel-dark border-b border-gold/20 py-3 shadow-elegant"
-          : "bg-transparent py-6"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-panel-dark border-b border-gold/20 shadow-elegant ${
+        isScrolled ? "py-3" : "py-6"
       }`}
       role="banner"
     >

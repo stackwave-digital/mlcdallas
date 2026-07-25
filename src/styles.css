@@ -321,10 +321,20 @@ html {
   }
 }
 
-.animate-card-back-left {
+@utility animate-card-back-left {
   animation: card-to-back-left 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-.animate-card-back-right {
+@utility animate-card-back-right {
   animation: card-to-back-right 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
